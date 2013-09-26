@@ -1,0 +1,12 @@
+<h1>Wizards & Spaceships</h1>
+
+<% @books.each do |bk| %>
+
+    <p><%= bk.title %></p>
+    <p><%= bk.author %></p>
+    <%= image_tag(bk.picture, :alt => bk.title) %> 
+    <p><%= bk.description %></p>
+<% end %>
+
+
+
