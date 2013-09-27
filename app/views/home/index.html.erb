@@ -2,10 +2,7 @@
 
 <% @books.each do |bk| %>
 
-    <p><%= bk.title %></p>
-    <p><%= bk.author %></p>
-    <%= image_tag(bk.picture, :alt => bk.title) %> 
-    <p><%= bk.description %></p>
+    <%= image_tag(bk.picture, :size  => "200x300") %>
 <% end %>
 
 
