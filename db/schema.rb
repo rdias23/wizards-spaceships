@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130926210844) do
+ActiveRecord::Schema.define(version: 20130928040346) do
+
+  create_table "booklists", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -27,7 +33,46 @@ ActiveRecord::Schema.define(version: 20130926210844) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rank"
+    t.integer  "booklist_id"
   end
+
+  add_index "books", ["booklist_id"], name: "index_books_on_booklist_id"
+
+  create_table "comments", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "topic_id"
+  end
+
+  add_index "comments", ["topic_id"], name: "index_comments_on_topic_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "suggested_books", force: true do |t|
+    t.string   "title"
+    t.string   "author"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "book_id"
+  end
+
+  add_index "suggested_books", ["book_id"], name: "index_suggested_books_on_book_id"
+
+  create_table "topics", force: true do |t|
+    t.string   "title"
+    t.string   "category"
+    t.text     "description"
+    t.integer  "votes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "book_id"
+    t.integer  "user_id"
+  end
+
+  add_index "topics", ["book_id"], name: "index_topics_on_book_id"
+  add_index "topics", ["user_id"], name: "index_topics_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

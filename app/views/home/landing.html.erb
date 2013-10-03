@@ -1,0 +1,21 @@
+<% content_for :body do %>
+<script type="text/javascript">
+	$.backstretch("/assets/wizards_and_spaceships.jpg");
+</script>
+<% end %>
+
+<script>
+	function set_page() {
+		if(!(window.location.href == 'http://localhost:3000/'))
+		{			
+			(window.location.href = '/');
+		}	
+	}
+
+
+	
+
+set_page();
+
+
+</script>

@@ -56,5 +56,5 @@ WizardsAndSpaceships::Application.routes.draw do
   #     resources :products
   #   end
 
-  root :to => "home#index"
+  root :to => "home#landing"
 end

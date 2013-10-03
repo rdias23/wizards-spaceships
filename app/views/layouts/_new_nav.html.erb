@@ -1,0 +1,83 @@
+<!-- Navigation -->
+
+<nav class="top-bar nav">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1 data-position="bottom" data-intro="You can click on this link at any time to be redirected back to the this home page." style="margin-left: 10px;">
+        <a href="/">
+          Wizards<span class="red">&</span>Spaceships
+        </a>
+      </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="left">
+     <% if @auth.blank? %>
+       <li class='name'><h1><%= link_to('Login', '#', :id => 'login-form-btn') %></h1></li>
+       <li class='name' data-position=right data-intro='Click here to Register'><h1><%=link_to('Register','#', :'data-reveal-id' => 'register' ) %></h1></li>
+     <% end %>
+
+
+    <% if @auth.present?  %>
+       <% if @auth.present? %> <!-- only show the below if logged in -->
+        <li class='has-dropdown'>
+          <%= link_to('Hello, ' +  @auth.email + '!', '#') %>
+        <ul class="dropdown">
+           <li><%= link_to('Logout', '/users/sign_out', :method => :delete ) %></li>
+        </ul>
+        </li>
+       <% else %>
+       <% end %>
+    <% end %>
+
+
+
+    </ul>
+
+  <ul class='right'>
+    <li><%= link_to(image_tag("/assets/gear.png", :size => '27x27', :id => 'gear'), "#", :'data-show-form' => true, :'data-toggle-form' => true, "data-toggle" => "chardinjs", id: 'gear-link') %></li>
+  </ul>
+
+
+</section>
+</nav>
+<!-- End Top Bar -->
+<!-- End Navigation -->
+
+<div id="login_form2" class="hide">
+
+<h2>Sign in</h2>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+  <% end -%>
+
+  <div><%= f.submit "LOGIN", :class => "button small radius alert" %> <a href="#" class="button small radius alert" id="cancel_btn">CANCEL</a></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>
+
+
+
+<div id='modals'>
+  <%#= render(:partial => 'layouts/nav_bar_modals') %>
+</div>
+
+<div id="register" class="reveal-modal [small]">
+  <%= render :template => "devise/registrations/new", 
+                    :locals => { 
+                      :resource => User.new, 
+                      :resource_name => :user } %>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
