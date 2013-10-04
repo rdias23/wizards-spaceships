@@ -1,0 +1,45 @@
+<% content_for :body do %>
+<script type="text/javascript">
+$(document).ready(function() {
+   var options = {
+      autoResize: true, // This will auto-update the layout when the browser window is resized.
+      container: $('.tiles'), // Optional, used for some extra CSS styling
+      offset: 10, // Optional, the distance between grid items
+      flexibleWidth: 210 // Optional, the maximum width of a grid item
+    };
+    var handler = $('.tile');
+    $('tiles').imagesLoaded(function() {
+      // Prepare layout options.
+      // Get a reference to your grid items.
+      // Call the layout function.
+      handler.wookmark(options);
+    });
+    handler.wookmark(options);
+});
+
+
+</script>
+<% end %>
+
+
+
+<div id="main" role="main">
+
+  <div class="row">
+    <div class="large-16 columns" id="books_all">
+     
+       <div class="tiles"> 
+          <% @books.each do |bk| %>
+	      <% if bk.picture? %>
+                <span class="tile">
+		<%= link_to image_tag(bk.picture, :width => '200px', :class => 'picture'), book_path(bk.id), :data => { :colorbox => true, :colorbox_height => '600px', :colorbox_width => '500px', :colorbox_iframe => true} %>
+              <% end %>
+                </span>
+          <% end %> 
+       </div>
+
+    </div>
+  </div>
+
+
+  </div> <!--  $('.tile').wookmark({autoResize: true}); end main -->

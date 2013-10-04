@@ -57,4 +57,5 @@ WizardsAndSpaceships::Application.routes.draw do
   #   end
 
   root :to => "home#landing"
+  resources :book
 end

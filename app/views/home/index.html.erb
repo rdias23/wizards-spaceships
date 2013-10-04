@@ -1,11 +1,5 @@
+
 <h1>Wizards & Spaceships</h1>
 
-<%= @auth.email %>
-
-<% @books.each do |bk| %>
-
-    <%= image_tag(bk.picture, :size  => "200x300") %>
-<% end %>
-
-
+<%= render(:partial => 'home/gallery') %>
 

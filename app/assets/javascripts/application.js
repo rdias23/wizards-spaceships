@@ -17,5 +17,8 @@
 //= require_tree .
 
 //= require jquery.backstretch.js
+//= require jquery.wookmark.js
+//= require imagesloaded.js
+//= require EventEmitter.js
 
 $(document).foundation();
