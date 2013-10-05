@@ -9,8 +9,8 @@ class BookController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.booklist_id = params[:booklist_id]
-    @book.save
+    @booklist = Booklist.find(params[:booklist_id])
+    @book.booklists << @booklist
     redirect_to :controller => "home", :action => "index"
 	 flash[:notice] = "book added"
   end

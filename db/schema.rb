@@ -11,12 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130928040346) do
+ActiveRecord::Schema.define(version: 20131005010743) do
 
   create_table "booklists", force: true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "booklists_books", id: false, force: true do |t|
+    t.integer "book_id",     null: false
+    t.integer "booklist_id", null: false
   end
 
   create_table "books", force: true do |t|
@@ -33,10 +38,7 @@ ActiveRecord::Schema.define(version: 20130928040346) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rank"
-    t.integer  "booklist_id"
   end
-
-  add_index "books", ["booklist_id"], name: "index_books_on_booklist_id"
 
   create_table "comments", force: true do |t|
     t.string   "title"
