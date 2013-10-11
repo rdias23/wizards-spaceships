@@ -1016,4 +1016,31 @@ $row-width: 102em;
 
 @import 'foundation';
 
-.red { color:red };
+.red { color:red; }
+.book_container { text-align: center;}
+
+#login_form2 { width: 300px;
+	       margin-left: 700px;
+	       margin-top: 130px;
+
+ }
+
+#login_form2 h2 {
+		color: red;
+}
+
+#login_form2 label {
+		color: red;
+}
+
+#login_form2 a:nth-child(3) {
+		color: red;
+}
+
+#register {
+		width: 500px;
+}
+
+#added_removed_notice {
+		color: red;
+}

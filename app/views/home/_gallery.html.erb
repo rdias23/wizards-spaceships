@@ -32,7 +32,7 @@ $(document).ready(function() {
           <% @books.each do |bk| %>
 	      <% if bk.picture? %>
                 <span class="tile">
-		<%= link_to image_tag(bk.picture, :width => '200px', :class => 'picture'), book_path(bk.id), :data => { :colorbox => true, :colorbox_height => '600px', :colorbox_width => '500px', :colorbox_iframe => true} %>
+		<%= link_to image_tag(bk.picture, :width => '200px', :class => 'picture'), book_path(bk.id), :data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '600px', :colorbox_iframe => true} %>
               <% end %>
                 </span>
           <% end %> 
