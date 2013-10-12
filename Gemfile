@@ -47,3 +47,5 @@ end
 gem 'devise'
 
 gem 'zurb-foundation', '~> 4.0.0'
+
+gem 'sidr-rails'

@@ -2,6 +2,7 @@ class Wizard
   @document_ready: ->
     $('body').on('click', '#login-form-btn', Wizard.show_login_form)
     $('body').on('click', '#cancel_btn', Wizard.hide_login_form)
+    $('#simple-menu').sidr()
 
   @show_login_form: ->
     if $('#login_form2').hasClass('hide')

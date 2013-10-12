@@ -8,6 +8,7 @@ class CustomFailure < Devise::FailureApp
       http_auth
     else
 	redirect
+	flash[:notice] = I18n.t(:unauthenticated, :scope => [ :devise, :failure ])
     end
   end
 end

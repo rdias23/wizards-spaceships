@@ -22,5 +22,6 @@
 //= require EventEmitter.js
 
 //= require colorbox-rails
+//= require jquery.sidr
 
 $(document).foundation();
