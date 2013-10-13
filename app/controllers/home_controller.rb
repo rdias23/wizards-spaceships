@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 	@user_books = @user.books
 	@top_shelf_books = @user_books[0..7].take(8)
 	
-	@bottom_shelf_books = @user_books.exists?(8) ? @user_books[9..16].take(8) : [] 
+	@bottom_shelf_books = @user_books[8] != nil ? @user_books[8..15].take(8) : [] 
 
 
 #	@bottom_shelf_books = @user_books[9..16].take(8)
