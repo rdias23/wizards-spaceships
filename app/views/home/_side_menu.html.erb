@@ -1,30 +1,15 @@
 <div class="bookshelf">
-<% @user.books.each do |ubk| %>
-	<%= ubk.title %></br>
+
+<div id="book_container">
+<% @top_shelf_books.each do |ubk| %>
+<div class="book_on_shelf"><%= ubk.title %></div>
 <% end %>
-<br />
 
-<br />
-<br />
+<div id="book_container_2">
+<% @bottom_shelf_books.each do |ubk| %>
+<div class="book_on_shelf"><%= ubk.title %></div>
+<% end %>
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+</div>
+</div>
 </div>

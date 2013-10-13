@@ -9,7 +9,13 @@ class HomeController < ApplicationController
   def index
 	@books = Book.all
 	@user = current_user
+	@user_books = @user.books
+	@top_shelf_books = @user_books[0..7].take(8)
+	
+	@bottom_shelf_books = @user_books.exists?(8) ? @user_books[9..16].take(8) : [] 
 
+
+#	@bottom_shelf_books = @user_books[9..16].take(8)
   end
 
 end

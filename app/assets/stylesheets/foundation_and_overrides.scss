@@ -1053,5 +1053,27 @@ $row-width: 102em;
 .bookshelf {
 		background: url( /bookshelf.jpg );
 		background-size: 100% 100%;
+		height: 600px;
 }
 
+#book_container {
+		position:absolute;
+		left: 30px;
+		top:60px;
+		-webkit-transform: rotate(90deg);
+    		-moz-transform: rotate(90deg);
+    		-o-transform: rotate(90deg);
+    		-ms-transform: rotate(90deg);
+    		transform: rotate(90deg);
+}
+
+.book_on_shelf {
+		font-size: 10px;
+		background: url( /book_1.JPG );
+		background-size: 100% auto;
+		padding: 5px;
+		width: 200px;
+		height: 30px;
+		text-align: center;
+	
+}
