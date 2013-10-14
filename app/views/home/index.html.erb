@@ -1,11 +1,44 @@
+<% content_for :head do %>
+<style>
+
+/* #book_container {
+                position:absolute;
+                left: 30px;
+                top: 58px;  
+		top:170-(<%= @user_books.length.to_i %>*14);
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+} 
+
+
+#book_container_2 {
+                position:absolute;
+                left: 30px;
+                top:404px;
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+} */
+</style>
+<% end %>
+
+
+
+
 <% content_for :body do %>
 <script type="text/javascript">
-	$('#side-menu').sidr();
+	$('#side-menu').sidr().click(function() { $.ajax("/update_side_menu")});
 	$.backstretch("/assets/hd-starry-sky.png");
 </script>
 <% end %>
 
-<%= link_to('View Bookshelf', '#sidr', :id => 'side-menu', :class => 'button hidden tiny success') %>
+<%= link_to('View / Hide Bookshelf', '#sidr', :id => 'side-menu', :class => 'button hidden tiny success') %><br/><br/>
+<%= link_to('Update Bookshelf', {:action => 'update_side_menu'}, :id => 'update-side-menu', :class => 'button hidden tiny success', :remote => true) %>
 
 <div id="home_gallery">
 <%= render(:partial => 'home/gallery') %>

@@ -18,4 +18,16 @@ class HomeController < ApplicationController
 #	@bottom_shelf_books = @user_books[9..16].take(8)
   end
 
+  def update_side_menu
+        @user = current_user
+        @user_books = @user.books
+        @top_shelf_books = @user_books[0..7].take(8)
+
+        @bottom_shelf_books = @user_books[8] != nil ? @user_books[8..15].take(8) : []
+
+
+    respond_to do | format |  
+        format.js {render :layout => false}  
+    end
+  end
 end

@@ -19,7 +19,7 @@ class BookController < ApplicationController
     else
 	@button_label = "Add Book To Bookshelf?"  
     end
-
+	
   end
 
   def update
@@ -31,15 +31,27 @@ class BookController < ApplicationController
     @booklist.books.each do |bk|
         @books_in_book_list << bk.title
     end
+
+    @books_in_book_list_length = @books_in_book_list.length
     
     if @books_in_book_list.include? @book.title
 	@book.booklists = @book.booklists - [@booklist]
    	redirect_to :controller => "book", :action => "show"
-        flash[:notice] = "book removed!" 
+        notices = ["<strong>BOOK REMOVED!</strong>", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+	flash[:notice] = notices.join("<br/>").html_safe 
     else
-    	@book.booklists << @booklist
-    	redirect_to :controller => "book", :action => "show"
-	 flash[:notice] = "book added!"
+     	case @books_in_book_list_length
+	   when 0 .. 15 
+		@book.booklists << @booklist
+      		redirect_to :controller => "book", :action => "show"
+		notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+		flash[:notice] = notices.join("<br/>").html_safe
+	   else
+		redirect_to :controller => "book", :action => "show"
+		notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
+		flash[:notice] = notices.join("<br/>").html_safe
+	   end
     end
+
   end
 end
