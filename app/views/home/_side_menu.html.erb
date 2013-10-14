@@ -2,14 +2,15 @@
 
 <div id="book_container">
 <% @top_shelf_books.each do |ubk| %>
-<div class="book_on_shelf"><%= ubk.title %></div>
+<a href= "#" style="color: black";><div class="book_on_shelf"><%= ubk.title %></div></a>
 <% end %>
 </div>
 `
 <div id="book_container_2">
 <% @bottom_shelf_books.each do |ubk| %>
-<div class="book_on_shelf"><%= ubk.title %></div>
+<a href="#" style="color: black";><div class="book_on_shelf"><%= ubk.title %></div></a>
 <% end %>
 
 </div>
 </div>
+
