@@ -54,4 +54,8 @@ class BookController < ApplicationController
     end
 
   end
+
+  def page
+	@book = Book.find(params[:id])
+  end
 end

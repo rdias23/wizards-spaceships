@@ -59,4 +59,5 @@ WizardsAndSpaceships::Application.routes.draw do
   root :to => "home#landing"
   resources :book
   get 'update_side_menu' => 'home#update_side_menu'
+  get 'page' => 'book#page'
 end
