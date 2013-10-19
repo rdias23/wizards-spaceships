@@ -12,20 +12,69 @@
       	<%= form_for :topic, url: {action: "new_topic"}, html: {class: "nifty form"} do |f| %>
       	<%= hidden_field_tag(:user_id, @user.id) %>
      	<%= hidden_field_tag(:book_id, @book.id) %>
-	<%= f.label :title %>
+	<%= f.label :title, "What would you like to discuss? (Phrase as one sentence question)" %>
 	<%= f.text_field :title %>
-	<%= f.label :description %>
-	<%= f.text_field :description %>
+	<%= f.label :description, "What do you have to say about this topic? Get the conversation started!" %>
+	<%= f.text_area :description %>
 	<%= f.label :category %>
 	<%= f.select(:category, [['Please select an option', nil], 'Plot', 'Character', 'Theme', 'Misc']) %>
 	<%= f.submit @button_label %>
 <% end %>
 
+</div>
 
+<div class="book_ratings">
+	<%= form_for @book, url: {action: "rate_book"}, html: {class: "nifty form"} do |f| %>
+		<%#= f.label :style, "How would you rate the writing \"style\" of this book?" %>
+		<%= hidden_field_tag(:book_id, @book.id) %>
 
-
-
-
+	<div class="book_ratings_sub_1">
+		<fieldset>
+		<legend>Rate Style</legend>
+			<% @ratings_style.each do |rts| %>
+			  <div class="rating_radial">
+			  <%= f.label rts %>
+			  <%= f.radio_button :rating_style, rts %>
+			  </div>
+			<% end %>
+		</fieldset>
+		<fieldset>
+		<legend>Rate Plot</legend>
+                        <% @ratings_plot.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_plot, rts %>
+                          </div>
+                        <% end %>
+                </fieldset>
+	</div>
+	<div class="book_ratings_sub_2">
+		<fieldset>
+		<legend>Rate Theme</legend>
+                        <% @ratings_theme.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_theme, rts %>
+                          </div>
+                        <% end %>
+                </fieldset>
+		<fieldset>
+		<legend>Rate Characters</legend>
+                        <% @ratings_characters.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_characters, rts %>
+                          </div>
+                        <% end %>
+                </fieldset> 
+	</div>
+	<div class="book_ratings_submit">	
+		<fieldset data-role="controlgroup" data-type="horizontal">
+		<%= f.submit @button_label_2 %>
+		</fieldset>		
+	</div>
+		<%#= f.collection_radio_buttons(:style, [['Please select an option', nil], 1, 2, 3, 4, 5]) %>
+	<% end %>
 
 </div>                
 

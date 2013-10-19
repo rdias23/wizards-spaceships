@@ -60,6 +60,12 @@ class BookController < ApplicationController
 	@topics = @book.topics
 	@user = current_user
 	@topic_number = 1
+	@button_label_2 = "Rate Book!"
+	@ratings_style = [1, 2, 3, 4, 5]
+	@ratings_plot = [1, 2, 3, 4, 5]
+	@ratings_theme = [1, 2, 3, 4, 5]
+	@ratings_characters = [1, 2, 3, 4, 5]
+	@ratings_style = [1, 2, 3, 4, 5]
   end
 
   def new_topic
@@ -71,6 +77,10 @@ class BookController < ApplicationController
 	@book_id = params[:book_id]
 	redirect_to :controller => "book", :action => "page", :id => @book_id
 
+  end
+
+  def rate_book
+	@book = Book.find(params[:book_id])
   end
 
   private
