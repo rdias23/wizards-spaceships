@@ -2,7 +2,11 @@
 
 <div id="book_container">
 <% @top_shelf_books.each do |ubk| %>
-<a href= "#" style="color: black";><div class="book_on_shelf"><%= ubk.title %></div></a>
+<!-- <a href= "#" style="color: black";><div class="book_on_shelf"><%#= ubk.title %></div></a> -->
+
+<%= link_to(page_path(:id => ubk.id), {:data => { :colorbox => true, :colorbox_height => '1600px', :colorbox_width => '1000px', :colorbox_iframe => true}, :style => 'color:black;' }) do %>
+        <div class="book_on_shelf"><%= ubk.title %></div>
+<% end %>
 <% end %>
 </div>
 `
@@ -11,7 +15,7 @@
 
 <!-- <%#= link_to image_tag(bk.picture, :width => '200px', :class => 'picture'), book_path(bk.id), :data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '600px', :colorbox_iframe => true} %> -->
 
-<%= link_to(page_path(:id => ubk.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '600px', :colorbox_iframe => true}, :style => 'color:black;' }) do %>
+<%= link_to(page_path(:id => ubk.id), {:data => { :colorbox => true, :colorbox_height => '1600px', :colorbox_width => '1000px', :colorbox_iframe => true}, :style => 'color:black;' }) do %>
 	<div class="book_on_shelf"><%= ubk.title %></div>
 	
 <% end %>

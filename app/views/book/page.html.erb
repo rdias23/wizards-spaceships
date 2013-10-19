@@ -1,1 +1,44 @@
-<%= @book.title %>
+<div class="page_header">Discussion Topics for: <br/>"<%= @book.title %>" </div>
+<div class="page_container">
+
+<div class="new_topic">
+<!--  <%#= form_for @book, url: {action: "update"}, html: {class: "nifty_form"} do |f| %>
+  <%#= hidden_field_tag(:booklist_id, @user.booklist.id) %>
+  <%#= hidden_field_tag(:id, @book.id) %>
+  <%#= f.submit @button_label %>
+  <div id="added_removed_notice"><%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %></div>
+<%# end %> -->
+
+      	<%= form_for :topic, url: {action: "new_topic"}, html: {class: "nifty form"} do |f| %>
+      	<%= hidden_field_tag(:user_id, @user.id) %>
+     	<%= hidden_field_tag(:book_id, @book.id) %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<%= f.label :description %>
+	<%= f.text_field :description %>
+	<%= f.label :category %>
+	<%= f.select(:category, [['Please select an option', nil], 'Plot', 'Character', 'Theme', 'Misc']) %>
+	<%= f.submit @button_label %>
+<% end %>
+
+
+
+
+
+
+
+</div>                
+
+<div class="topics_container">
+<% @topics.each do |bkt| %>
+  
+   <div class="topic"> 
+   Topic #: <%= @topic_number %>, <%= bkt.title %><br/>by <%= bkt.user.email %><br/>
+   <%= bkt.comments.length %> Comment(s)<br/><br/>
+   </div>
+   <% @topic_number = @topic_number.to_i  %>
+   <% @topic_number += 1 %>
+<% end %>
+
+</div>
+</div>

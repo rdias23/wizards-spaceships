@@ -57,5 +57,25 @@ class BookController < ApplicationController
 
   def page
 	@book = Book.find(params[:id])
+	@topics = @book.topics
+	@user = current_user
+	@topic_number = 1
   end
+
+  def new_topic
+	@user = User.find(params[:user_id])
+	@book = Book.find(params[:book_id])
+	@topic = Topic.create(topic_params)
+	@user.topics << @topic
+	@book.topics << @topic
+	@book_id = params[:book_id]
+	redirect_to :controller => "book", :action => "page", :id => @book_id
+
+  end
+
+  private
+  def topic_params
+    params.require(:topic).permit(:user_id, :book_id, :title, :description, :category)
+  end
+
 end
