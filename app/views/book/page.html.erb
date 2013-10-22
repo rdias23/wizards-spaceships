@@ -1,7 +1,47 @@
 <div class="page_top_section">
 
 <div class="page_header_header">
-<%= @book.title %>
+<strong><%= @book.title %></strong>
+</div>
+
+<div class="page_header">
+        <h3> Stats: </br> </br> </h3>
+<div class="stats">
+
+
+<fieldset class="fieldset2">
+<div class="stats_container1">
+<div class="inner_stats_container">
+<span> <strong> Overall Rating: </strong> <%= @book.rating_overall %> out of 5 </span></br>
+<span> <strong> NPR Rank: </strong><%= @book.rank.ordinalize %> </span></br>
+<span> <strong> Users with "Book On Shelf": </strong><%= @book.users.length %> </span></br>
+<span> <strong> Topics: </strong> <%= @book.topics.length %> <strong> Comments: </strong> <%= @book.comments.length %> </span></br>
+</div>
+</div>
+
+<div class="stats_container2">
+<div class="inner_stats_container">
+<span> <strong> Style Rating: </strong><%= @book.rating_style %> out of 5 </span></br>
+<span> <strong> Plot Rating: </strong><%= @book.rating_plot  %> out of 5  </span></br>
+<span> <strong> Theme Rating: </strong><%= @book.rating_theme  %> out of 5 </span></br>
+<span> <strong> Characters Rating: </strong><%= @book.rating_characters  %> out of 5  </span>
+</div>
+</div>
+
+<div class="stats_container3">
+<div class="inner_stats_container">
+<span> <strong> Author: </strong> <%= @book.author %></span></br>
+<span> <strong> Publication: </strong> <%= @book.publication %> </span></br>
+<span> <strong> Last Comment at: </strong> <%= @book_comment_last_created_at %></span></br>
+<span> <strong> for </strong> <%= @book_comment_last_created_at_topic %> </span>
+</div>
+</div>
+
+
+</div>
+</fieldset>
+
+</div>
 </div>
 
 <div class="book_ratings">
@@ -10,7 +50,7 @@
                 <%= hidden_field_tag(:book_id, @book.id) %>
 
         <div class="book_ratings_sub_1">
-                <fieldset>
+                <fieldset class="fieldset">
                 <legend>Rate Style</legend>
                         <% @ratings_style.each do |rts| %>
                           <div class="rating_radial">
@@ -20,7 +60,7 @@
                         <% end %>
                 <div class="current_ratings">Your Current Rating: <%= @current_style_rt %> </div>
                 </fieldset>
-                <fieldset>
+                <fieldset class="fieldset">
                 <legend>Rate Plot</legend>
                         <% @ratings_plot.each do |rts| %>
                           <div class="rating_radial">
@@ -32,7 +72,7 @@
                 </fieldset>
         </div>
         <div class="book_ratings_sub_2">
-                <fieldset>
+                <fieldset class="fieldset">
                 <legend>Rate Theme</legend>
                         <% @ratings_theme.each do |rts| %>
                           <div class="rating_radial">
@@ -42,7 +82,7 @@
                         <% end %>
                 <div class="current_ratings">Your Current Rating: <%= @current_theme_rt %> </div>
                 </fieldset>
-                <fieldset>
+                <fieldset class="fieldset">
                 <legend>Rate Characters</legend>
                         <% @ratings_characters.each do |rts| %>
                           <div class="rating_radial">
@@ -54,24 +94,14 @@
                 </fieldset>
         </div>
         <div class="book_ratings_submit">
-                <fieldset data-role="controlgroup" data-type="horizontal">
                 <%= f.submit @button_label_2 %>
                 <div id="rating_notice"><%= content_tag(:div, flash[:notice], :id => "flash_notice2") if flash[:notice] %></div>
 
-                </fieldset>
         </div>
                 <%#= f.collection_radio_buttons(:style, [['Please select an option', nil], 1, 2, 3, 4, 5]) %>
         <% end %>
 
 </div>
-<div class="page_header">
-
-<span> average Style Rating: <%= @averaged_style %> out of 5  (<%= @averaged_style_rating_array.length %> rating(s)) </span></br>
-<span> average Plot Rating: <%= @averaged_plot %> out of 5 (<%= @averaged_plot_rating_array.length %> rating(s)) </span></br>
-<span> average Theme Rating: <%= @averaged_plot %> out of 5 (<%= @averaged_theme_rating_array.length %> rating(s)) </span></br>
-<span> average Characters Rating: <%= @averaged_plot %> out of 5 (<%= @averaged_characters_rating_array.length %> rating(s)) </span>
-
- </div>
 <div class="page_container">
 
 <div class="new_topic">
@@ -82,19 +112,20 @@
   <div id="added_removed_notice"><%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %></div>
 <%# end %> -->
 
-	<h3> Add a new Topic! </h3>
-
+	<fieldset class="fieldset3">
+	<legend> Add a new Topic! </legend>
       	<%= form_for :topic, url: {action: "new_topic"}, html: {class: "nifty form"} do |f| %>
       	<%= hidden_field_tag(:user_id, @user.id) %>
      	<%= hidden_field_tag(:book_id, @book.id) %>
-	<%= f.label :title, "What would you like to discuss? (Phrase as one sentence question)" %>
+	<%= f.label :title, "What would you like to discuss?</br><span>(Phrase as one sentence question please!)</span>".html_safe %>
 	<%= f.text_field :title %>
-	<%= f.label :description, "What do you have to say about this topic? Get the conversation started!" %>
+	<%= f.label :description, "What do you have to say about this topic?</br><span>Get the conversation started!</span>".html_safe %>
 	<%= f.text_area :description %>
 	<%= f.label :category %>
 	<%= f.select(:category, [['Please select an option', nil], 'Plot', 'Character', 'Theme', 'Misc']) %>
 	<%= f.submit @button_label %>
 <% end %>
+	</fieldset class="fieldset2">
 </div>
 
 </div>

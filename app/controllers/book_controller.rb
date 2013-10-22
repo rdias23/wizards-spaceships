@@ -99,11 +99,17 @@ class BookController < ApplicationController
                 end
         end
 
-        @averaged_style_rating_array.length > 0 ? (@averaged_style = (@averaged_style_rating_array.inject{|sum,x| sum + x}) / @averaged_style_rating_array.length) : (@averaged_style = "no ratings")
-        @averaged_plot_rating_array.length > 0 ? (@averaged_plot = (@averaged_plot_rating_array.inject{|sum,x| sum + x}) / @averaged_plot_rating_array.length) : (@averaged_plot = "no ratings")
-        @averaged_theme_rating_array.length > 0 ? (@averaged_theme = (@averaged_theme_rating_array.inject{|sum,x| sum + x}) / @averaged_theme_rating_array.length) : (@averaged_theme = "no ratings")
-        @averaged_characters_rating_array.length > 0 ? (@averaged_characters = (@averaged_characters_rating_array.inject{|sum,x| sum + x}) / @averaged_characters_rating_array.length) : (@averaged_characters = "no ratings")
+        @averaged_style_rating_array.length > 0 ? (@book.rating_style = (@averaged_style_rating_array.inject{|sum,x| sum + x}) / @averaged_style_rating_array.length) : (@book.rating_style = "no ratings")
+        @averaged_plot_rating_array.length > 0 ? (@book.rating_plot = (@averaged_plot_rating_array.inject{|sum,x| sum + x}) / @averaged_plot_rating_array.length) : (@book.rating_plot = "no ratings")
+        @averaged_theme_rating_array.length > 0 ? (@book.rating_theme = (@averaged_theme_rating_array.inject{|sum,x| sum + x}) / @averaged_theme_rating_array.length) : (@book.rating_theme = "no ratings")
+        @averaged_characters_rating_array.length > 0 ? (@book.rating_characters = (@averaged_characters_rating_array.inject{|sum,x| sum + x}) / @averaged_characters_rating_array.length) : (@book.rating_characters = "no ratings")
 
+	@book.rating_overall = ((@book.rating_style + @book.rating_plot + @book.rating_theme + @book.rating_characters)/ 4)
+
+	@book_comment_last_created_at = "--"
+	@book_comment_last_created_at_topic = "--"
+	(@book_comment_last_created_at = @book.comments.last.created_at.to_formatted_s(:short)) if (@book.comments.last != nil)
+	(@book_comment_last_created_at_topic = @book.comments.last.topic.title) if (@book.comments.last != nil)
   end
 
   def new_topic
@@ -132,7 +138,6 @@ class BookController < ApplicationController
 		(@current_plot_rt = @user.ratings.where(book_id: @book.id)[0].rating_plot) if (@user.ratings.where(book_id: @book.id)[0].rating_plot != nil)
 		(@current_theme_rt = @user.ratings.where(book_id: @book.id)[0].rating_theme) if (@user.ratings.where(book_id: @book.id)[0].rating_theme != nil)
 		(@current_characters_rt = @user.ratings.where(book_id: @book.id)[0].rating_characters) if (@user.ratings.where(book_id: @book.id)[0].rating_characters != nil)
-
 
 		@user.ratings.where(book_id: @book.id)[0].destroy
 		@rating = Rating.create(rating_params)
