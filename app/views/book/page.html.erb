@@ -1,4 +1,77 @@
-<div class="page_header">Discussion Topics for: <br/>"<%= @book.title %>" </div>
+<div class="page_top_section">
+
+<div class="page_header_header">
+<%= @book.title %>
+</div>
+
+<div class="book_ratings">
+        <%= form_for @book, url: {action: "rate_book"}, html: {class: "nifty form"} do |f| %>
+                <%#= f.label :style, "How would you rate the writing \"style\" of this book?" %>
+                <%= hidden_field_tag(:book_id, @book.id) %>
+
+        <div class="book_ratings_sub_1">
+                <fieldset>
+                <legend>Rate Style</legend>
+                        <% @ratings_style.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_style, rts %>
+                          </div>
+                        <% end %>
+                <div class="current_ratings">Your Current Rating: <%= @current_style_rt %> </div>
+                </fieldset>
+                <fieldset>
+                <legend>Rate Plot</legend>
+                        <% @ratings_plot.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_plot, rts %>
+                          </div>
+                        <% end %>
+                <div class="current_ratings">Your Current Rating: <%= @current_plot_rt %> </div>
+                </fieldset>
+        </div>
+        <div class="book_ratings_sub_2">
+                <fieldset>
+                <legend>Rate Theme</legend>
+                        <% @ratings_theme.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_theme, rts %>
+                          </div>
+                        <% end %>
+                <div class="current_ratings">Your Current Rating: <%= @current_theme_rt %> </div>
+                </fieldset>
+                <fieldset>
+                <legend>Rate Characters</legend>
+                        <% @ratings_characters.each do |rts| %>
+                          <div class="rating_radial">
+                          <%= f.label rts %>
+                          <%= f.radio_button :rating_characters, rts %>
+                          </div>
+                        <% end %>
+                <div class="current_ratings">Your Current Rating: <%= @current_characters_rt %> </div>
+                </fieldset>
+        </div>
+        <div class="book_ratings_submit">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                <%= f.submit @button_label_2 %>
+                <div id="rating_notice"><%= content_tag(:div, flash[:notice], :id => "flash_notice2") if flash[:notice] %></div>
+
+                </fieldset>
+        </div>
+                <%#= f.collection_radio_buttons(:style, [['Please select an option', nil], 1, 2, 3, 4, 5]) %>
+        <% end %>
+
+</div>
+<div class="page_header">
+
+<span> average Style Rating: <%= @averaged_style %> out of 5  (<%= @averaged_style_rating_array.length %> rating(s)) </span></br>
+<span> average Plot Rating: <%= @averaged_plot %> out of 5 (<%= @averaged_plot_rating_array.length %> rating(s)) </span></br>
+<span> average Theme Rating: <%= @averaged_plot %> out of 5 (<%= @averaged_theme_rating_array.length %> rating(s)) </span></br>
+<span> average Characters Rating: <%= @averaged_plot %> out of 5 (<%= @averaged_characters_rating_array.length %> rating(s)) </span>
+
+ </div>
 <div class="page_container">
 
 <div class="new_topic">
@@ -8,6 +81,8 @@
   <%#= f.submit @button_label %>
   <div id="added_removed_notice"><%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %></div>
 <%# end %> -->
+
+	<h3> Add a new Topic! </h3>
 
       	<%= form_for :topic, url: {action: "new_topic"}, html: {class: "nifty form"} do |f| %>
       	<%= hidden_field_tag(:user_id, @user.id) %>
@@ -20,63 +95,10 @@
 	<%= f.select(:category, [['Please select an option', nil], 'Plot', 'Character', 'Theme', 'Misc']) %>
 	<%= f.submit @button_label %>
 <% end %>
+</div>
 
 </div>
 
-<div class="book_ratings">
-	<%= form_for @book, url: {action: "rate_book"}, html: {class: "nifty form"} do |f| %>
-		<%#= f.label :style, "How would you rate the writing \"style\" of this book?" %>
-		<%= hidden_field_tag(:book_id, @book.id) %>
-
-	<div class="book_ratings_sub_1">
-		<fieldset>
-		<legend>Rate Style</legend>
-			<% @ratings_style.each do |rts| %>
-			  <div class="rating_radial">
-			  <%= f.label rts %>
-			  <%= f.radio_button :rating_style, rts %>
-			  </div>
-			<% end %>
-		</fieldset>
-		<fieldset>
-		<legend>Rate Plot</legend>
-                        <% @ratings_plot.each do |rts| %>
-                          <div class="rating_radial">
-                          <%= f.label rts %>
-                          <%= f.radio_button :rating_plot, rts %>
-                          </div>
-                        <% end %>
-                </fieldset>
-	</div>
-	<div class="book_ratings_sub_2">
-		<fieldset>
-		<legend>Rate Theme</legend>
-                        <% @ratings_theme.each do |rts| %>
-                          <div class="rating_radial">
-                          <%= f.label rts %>
-                          <%= f.radio_button :rating_theme, rts %>
-                          </div>
-                        <% end %>
-                </fieldset>
-		<fieldset>
-		<legend>Rate Characters</legend>
-                        <% @ratings_characters.each do |rts| %>
-                          <div class="rating_radial">
-                          <%= f.label rts %>
-                          <%= f.radio_button :rating_characters, rts %>
-                          </div>
-                        <% end %>
-                </fieldset> 
-	</div>
-	<div class="book_ratings_submit">	
-		<fieldset data-role="controlgroup" data-type="horizontal">
-		<%= f.submit @button_label_2 %>
-		</fieldset>		
-	</div>
-		<%#= f.collection_radio_buttons(:style, [['Please select an option', nil], 1, 2, 3, 4, 5]) %>
-	<% end %>
-
-</div>                
 
 <div class="topics_container">
 <% @topics.each do |bkt| %>

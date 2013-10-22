@@ -60,12 +60,50 @@ class BookController < ApplicationController
 	@topics = @book.topics
 	@user = current_user
 	@topic_number = 1
-	@button_label_2 = "Rate Book!"
-	@ratings_style = [1, 2, 3, 4, 5]
+	
+	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_style != nil ? @current_style_rt = @user.ratings.where(book_id: @book.id)[0].rating_style : @current_style_rt = "none"
+	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_plot != nil ? @current_plot_rt = @user.ratings.where(book_id: @book.id)[0].rating_plot : @current_plot_rt = "none"
+	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_theme != nil ? @current_theme_rt = @user.ratings.where(book_id: @book.id)[0].rating_theme : @current_theme_rt = "none"
+	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_characters != nil ? @current_characters_rt = @user.ratings.where(book_id: @book.id)[0].rating_characters : @current_characters_rt = "none"
+
+	if @user.ratings.where(book_id: @book.id).exists?
+		@button_label_2 = "Re-Rate Book!"
+	else	
+		@button_label_2 = "Rate Book!"
+	end
+
 	@ratings_plot = [1, 2, 3, 4, 5]
 	@ratings_theme = [1, 2, 3, 4, 5]
 	@ratings_characters = [1, 2, 3, 4, 5]
 	@ratings_style = [1, 2, 3, 4, 5]
+
+
+
+	@averaged_style_rating_array = []
+        @averaged_plot_rating_array = []
+        @averaged_theme_rating_array = []
+        @averaged_characters_rating_array = []
+
+        @book.ratings.each do |rt|
+                if rt.rating_style != nil
+                        @averaged_style_rating_array << rt.rating_style
+                end
+                if rt.rating_plot != nil
+                        @averaged_plot_rating_array << rt.rating_plot
+                end
+                if rt.rating_theme != nil
+                        @averaged_theme_rating_array << rt.rating_theme
+                end
+                if rt.rating_characters != nil
+                        @averaged_characters_rating_array << rt.rating_characters
+                end
+        end
+
+        @averaged_style_rating_array.length > 0 ? (@averaged_style = (@averaged_style_rating_array.inject{|sum,x| sum + x}) / @averaged_style_rating_array.length) : (@averaged_style = "no ratings")
+        @averaged_plot_rating_array.length > 0 ? (@averaged_plot = (@averaged_plot_rating_array.inject{|sum,x| sum + x}) / @averaged_plot_rating_array.length) : (@averaged_plot = "no ratings")
+        @averaged_theme_rating_array.length > 0 ? (@averaged_theme = (@averaged_theme_rating_array.inject{|sum,x| sum + x}) / @averaged_theme_rating_array.length) : (@averaged_theme = "no ratings")
+        @averaged_characters_rating_array.length > 0 ? (@averaged_characters = (@averaged_characters_rating_array.inject{|sum,x| sum + x}) / @averaged_characters_rating_array.length) : (@averaged_characters = "no ratings")
+
   end
 
   def new_topic
@@ -81,11 +119,51 @@ class BookController < ApplicationController
 
   def rate_book
 	@book = Book.find(params[:book_id])
+	@user = current_user
+	@user_id = @user.id
+	@current_style_rt = nil
+	@current_plot_rt = nil
+	@current_theme_rt = nil
+	@current_characters_rt = nil
+
+	if @user.ratings.where(book_id: @book.id).exists?
+		
+		(@current_style_rt = @user.ratings.where(book_id: @book.id)[0].rating_style) if (@user.ratings.where(book_id: @book.id)[0].rating_style != nil)
+		(@current_plot_rt = @user.ratings.where(book_id: @book.id)[0].rating_plot) if (@user.ratings.where(book_id: @book.id)[0].rating_plot != nil)
+		(@current_theme_rt = @user.ratings.where(book_id: @book.id)[0].rating_theme) if (@user.ratings.where(book_id: @book.id)[0].rating_theme != nil)
+		(@current_characters_rt = @user.ratings.where(book_id: @book.id)[0].rating_characters) if (@user.ratings.where(book_id: @book.id)[0].rating_characters != nil)
+
+
+		@user.ratings.where(book_id: @book.id)[0].destroy
+		@rating = Rating.create(rating_params)
+		
+		(@rating.rating_style = @current_style_rt) if ((@rating.rating_style == nil) && (@current_style_rt != nil))
+		(@rating.rating_plot = @current_plot_rt) if ((@rating.rating_plot == nil) && (@current_plot_rt != nil))
+		(@rating.rating_theme = @current_theme_rt) if ((@rating.rating_theme == nil) && (@current_theme_rt != nil))
+		(@rating.rating_characters = @current_characters_rt) if ((@rating.rating_characters == nil) && (@current_characters_rt != nil))
+		
+		@user.ratings << @rating
+		@book.ratings << @rating
+		redirect_to :controller => "book", :action => "page", :id => @book.id
+        	flash[:notice] = "Book has been re-rated!"
+	else
+		@rating = Rating.create(rating_params)
+                @user.ratings << @rating
+                @book.ratings << @rating
+		redirect_to :controller => "book", :action => "page", :id => @book.id
+        	flash[:notice] = "Book has been rated!"
+	end
+
+	
   end
 
   private
   def topic_params
     params.require(:topic).permit(:user_id, :book_id, :title, :description, :category)
+  end
+
+  def rating_params
+    params.require(:book).permit(:book_id, :rating_style, :rating_plot, :rating_theme, :rating_characters)
   end
 
 end
