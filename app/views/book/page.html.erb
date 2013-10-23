@@ -5,17 +5,17 @@
 </div>
 
 <div class="page_header">
-        <h3> Stats: </br> </br> </h3>
 <div class="stats">
 
 
 <fieldset class="fieldset2">
+	<legend>Stats</legend>
 <div class="stats_container1">
 <div class="inner_stats_container">
 <span> <strong> Overall Rating: </strong> <%= @book.rating_overall %> out of 5 </span></br>
 <span> <strong> NPR Rank: </strong><%= @book.rank.ordinalize %> </span></br>
 <span> <strong> Users with "Book On Shelf": </strong><%= @book.users.length %> </span></br>
-<span> <strong> Topics: </strong> <%= @book.topics.length %> <strong> Comments: </strong> <%= @book.comments.length %> </span></br>
+<span> <strong> Topics: </strong> <%= @book.topics.length %> <strong>, Comments: </strong> <%= @book.comments.length %> </span></br>
 </div>
 </div>
 
