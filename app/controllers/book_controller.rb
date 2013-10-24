@@ -58,6 +58,7 @@ class BookController < ApplicationController
   def page
 	@book = Book.find(params[:id])
 	@topics = @book.topics
+	@newest_topic = @book.topics.order('created_at DESC').first
 	@user = current_user
 	@topic_number = 1
 	
@@ -114,6 +115,8 @@ class BookController < ApplicationController
 	(@book_comment_last_created_at_topic = @book.comments.last.topic.title) if (@book.comments.last != nil)
 
 	@button_label3 = "View Topic Page"
+
+	
   end
 
   def new_topic

@@ -1,5 +1,4 @@
-<div class="page_top_section">
-
+<div class="page_top_section"> 
 <div class="page_header_header">
 <strong><%= @book.title %></strong>
 </div>
@@ -12,9 +11,10 @@
 	<legend>Stats</legend>
 <div class="stats_container1">
 <div class="inner_stats_container">
-<span> <strong> Overall Rating: </strong> <%= @book.rating_overall %> 
+<span> <strong> Overall Rating: </strong> 
 
-<% unless @book.rating_overall == nil %> 
+<% unless @book.rating_overall == nil %>
+<%= (@book.rating_overall).round(2) %> 
 (out of 5)
 <% end %>
 
@@ -27,30 +27,34 @@
 
 <div class="stats_container2">
 <div class="inner_stats_container">
-<span> <strong> Style Rating: </strong><%= @book.rating_style %> 
+<span> <strong> Style Rating: </strong>
 
-<% unless @book.rating_style == nil %> 
+<% unless @book.rating_style == nil %>
+<%= (@book.rating_style).round(2) %>
 (out of 5) 
 <% end %>
 
 </span></br>
-<span> <strong> Plot Rating: </strong><%= @book.rating_plot  %> 
+<span> <strong> Plot Rating: </strong>
 
-<% unless @book.rating_plot == nil %> 
+<% unless @book.rating_plot == nil %>
+<%= (@book.rating_plot).round(2)  %> 
 (out of 5)
 <% end %>
 
 </span></br>
-<span> <strong> Theme Rating: </strong><%= @book.rating_theme  %>
+<span> <strong> Theme Rating: </strong>
 
-<% unless @book.rating_theme == nil %> 
+<% unless @book.rating_theme == nil %>
+<%= (@book.rating_theme).round(2)  %> 
 (out of 5) 
 <% end %>
 
 </span></br>
-<span> <strong> Characters Rating: </strong><%= @book.rating_characters  %> 
+<span> <strong> Characters Rating: </strong>
 
-<% unless @book.rating_characters == nil %> 
+<% unless @book.rating_characters == nil %>
+<%= (@book.rating_characters).round(2)  %> 
 (out of 5) 
 <% end %>
 
@@ -163,7 +167,41 @@
 
 <div class="topics_container">
 
+<% unless @book.topics.blank? == true %>
+<h5>Newest Topic</h5>
+<table class="newest_topic_table" border="1">
+<tr>
+<th>Votes</th>
+<th>Upvote?</th>
+<th>Downvote?</th>
+<th>Title</th>
+<th>Category</th>
+<th>User</th>
+<th># of Comments</th>
+<th> View Topic Page!</th>
+</tr>
 
+<tr>
+<td>Topic#:<%= @topic_number %> </td>
+<td> Upvote? </td>
+<td> Downvote? </td>
+<td> <%= @newest_topic.title %></td>
+<td> <%= @newest_topic.category %></td>
+<td> <%= @newest_topic.user.email %></td>
+<td> <%= @newest_topic.comments.length %> Comment(s)</td>
+<td>
+
+<%= form_for :topic, url: {action: "page_topic"}, html: {class: "nifty form"} do |f| %>
+<%= hidden_field_tag(:id, @newest_topic.id) %>
+<%= f.submit @button_label3 %>
+<% end %>
+
+</td>
+</tr>
+
+</table>
+
+<h5>Topics</h5>
 <table class="topic_table" border="1">
 <tr>
 <th>Votes</th>
@@ -178,7 +216,6 @@
 
 <% @topics.each do |bkt| %>
   
-   <div class="topic"> 
 <tr>
 <td>Topic#:<%= @topic_number %> </td>
 <td> Upvote? </td>
@@ -202,5 +239,5 @@
 <% end %>
 </table>
 
-</div>
+<% end %>
 </div>
