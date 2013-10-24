@@ -99,17 +99,21 @@ class BookController < ApplicationController
                 end
         end
 
-        @averaged_style_rating_array.length > 0 ? (@book.rating_style = (@averaged_style_rating_array.inject{|sum,x| sum + x}) / @averaged_style_rating_array.length) : (@book.rating_style = "no ratings")
-        @averaged_plot_rating_array.length > 0 ? (@book.rating_plot = (@averaged_plot_rating_array.inject{|sum,x| sum + x}) / @averaged_plot_rating_array.length) : (@book.rating_plot = "no ratings")
-        @averaged_theme_rating_array.length > 0 ? (@book.rating_theme = (@averaged_theme_rating_array.inject{|sum,x| sum + x}) / @averaged_theme_rating_array.length) : (@book.rating_theme = "no ratings")
-        @averaged_characters_rating_array.length > 0 ? (@book.rating_characters = (@averaged_characters_rating_array.inject{|sum,x| sum + x}) / @averaged_characters_rating_array.length) : (@book.rating_characters = "no ratings")
+        @averaged_style_rating_array.length > 0 ? (@book.rating_style = (@averaged_style_rating_array.inject{|sum,x| sum + x}) / @averaged_style_rating_array.length) : (@book.rating_style = nil)
+        @averaged_plot_rating_array.length > 0 ? (@book.rating_plot = (@averaged_plot_rating_array.inject{|sum,x| sum + x}) / @averaged_plot_rating_array.length) : (@book.rating_plot = nil)
+        @averaged_theme_rating_array.length > 0 ? (@book.rating_theme = (@averaged_theme_rating_array.inject{|sum,x| sum + x}) / @averaged_theme_rating_array.length) : (@book.rating_theme = nil)
+        @averaged_characters_rating_array.length > 0 ? (@book.rating_characters = (@averaged_characters_rating_array.inject{|sum,x| sum + x}) / @averaged_characters_rating_array.length) : (@book.rating_characters = nil)
 
-	@book.rating_overall = ((@book.rating_style + @book.rating_plot + @book.rating_theme + @book.rating_characters)/ 4)
+	@rating_overall_array = @averaged_style_rating_array + @averaged_plot_rating_array + @averaged_theme_rating_array + @averaged_characters_rating_array	
+
+	@rating_overall_array.length != 0 ? @book.rating_overall = @rating_overall_array.inject{|sum,x| sum + x} / @rating_overall_array.length : @book.rating_overall = nil
 
 	@book_comment_last_created_at = "--"
 	@book_comment_last_created_at_topic = "--"
 	(@book_comment_last_created_at = @book.comments.last.created_at.to_formatted_s(:short)) if (@book.comments.last != nil)
 	(@book_comment_last_created_at_topic = @book.comments.last.topic.title) if (@book.comments.last != nil)
+
+	@button_label3 = "View Topic Page"
   end
 
   def new_topic
@@ -160,6 +164,10 @@ class BookController < ApplicationController
 	end
 
 	
+  end
+
+  def page_topic
+	@topic = Topic.find(params[:id])
   end
 
   private

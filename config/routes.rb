@@ -62,4 +62,5 @@ WizardsAndSpaceships::Application.routes.draw do
   get 'page' => 'book#page'
   post 'new_topic' => 'book#new_topic'
   patch 'rate_book' => 'book#rate_book'
+  post 'page_topic' => 'book#page_topic'
 end

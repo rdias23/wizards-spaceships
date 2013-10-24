@@ -12,7 +12,13 @@
 	<legend>Stats</legend>
 <div class="stats_container1">
 <div class="inner_stats_container">
-<span> <strong> Overall Rating: </strong> <%= @book.rating_overall %> out of 5 </span></br>
+<span> <strong> Overall Rating: </strong> <%= @book.rating_overall %> 
+
+<% unless @book.rating_overall == nil %> 
+(out of 5)
+<% end %>
+
+</span></br>
 <span> <strong> NPR Rank: </strong><%= @book.rank.ordinalize %> </span></br>
 <span> <strong> Users with "Book On Shelf": </strong><%= @book.users.length %> </span></br>
 <span> <strong> Topics: </strong> <%= @book.topics.length %> <strong>, Comments: </strong> <%= @book.comments.length %> </span></br>
@@ -21,10 +27,34 @@
 
 <div class="stats_container2">
 <div class="inner_stats_container">
-<span> <strong> Style Rating: </strong><%= @book.rating_style %> out of 5 </span></br>
-<span> <strong> Plot Rating: </strong><%= @book.rating_plot  %> out of 5  </span></br>
-<span> <strong> Theme Rating: </strong><%= @book.rating_theme  %> out of 5 </span></br>
-<span> <strong> Characters Rating: </strong><%= @book.rating_characters  %> out of 5  </span>
+<span> <strong> Style Rating: </strong><%= @book.rating_style %> 
+
+<% unless @book.rating_style == nil %> 
+(out of 5) 
+<% end %>
+
+</span></br>
+<span> <strong> Plot Rating: </strong><%= @book.rating_plot  %> 
+
+<% unless @book.rating_plot == nil %> 
+(out of 5)
+<% end %>
+
+</span></br>
+<span> <strong> Theme Rating: </strong><%= @book.rating_theme  %>
+
+<% unless @book.rating_theme == nil %> 
+(out of 5) 
+<% end %>
+
+</span></br>
+<span> <strong> Characters Rating: </strong><%= @book.rating_characters  %> 
+
+<% unless @book.rating_characters == nil %> 
+(out of 5) 
+<% end %>
+
+</span>
 </div>
 </div>
 
@@ -132,15 +162,45 @@
 
 
 <div class="topics_container">
+
+
+<table class="topic_table" border="1">
+<tr>
+<th>Votes</th>
+<th>Upvote?</th>
+<th>Downvote?</th>
+<th>Title</th>
+<th>Category</th>
+<th>User</th>
+<th># of Comments</th>
+<th> View Topic Page!</th>
+</tr>
+
 <% @topics.each do |bkt| %>
   
    <div class="topic"> 
-   Topic #: <%= @topic_number %>, <%= bkt.title %><br/>by <%= bkt.user.email %><br/>
-   <%= bkt.comments.length %> Comment(s)<br/><br/>
+<tr>
+<td>Topic#:<%= @topic_number %> </td>
+<td> Upvote? </td>
+<td> Downvote? </td>
+<td> <%= bkt.title %></td>
+<td> <%= bkt.category %></td>
+<td> <%= bkt.user.email %></td>
+<td> <%= bkt.comments.length %> Comment(s)</td>
+<td> 
+
+<%= form_for :topic, url: {action: "page_topic"}, html: {class: "nifty form"} do |f| %>
+<%= hidden_field_tag(:id, bkt.id) %>
+<%= f.submit @button_label3 %>
+<% end %>
+
+</td>
+</tr>
    </div>
    <% @topic_number = @topic_number.to_i  %>
    <% @topic_number += 1 %>
 <% end %>
+</table>
 
 </div>
 </div>
