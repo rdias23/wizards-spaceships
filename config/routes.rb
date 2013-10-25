@@ -61,6 +61,10 @@ WizardsAndSpaceships::Application.routes.draw do
   get 'update_side_menu' => 'home#update_side_menu'
   get 'page' => 'book#page'
   post 'new_topic' => 'book#new_topic'
+  post 'new_comment' => 'book#new_comment'
   patch 'rate_book' => 'book#rate_book'
+  get 'page_topic' => 'book#page_topic'
   post 'page_topic' => 'book#page_topic'
+  post 'update' => 'book#update'
+  patch 'update' => 'book#update'
 end

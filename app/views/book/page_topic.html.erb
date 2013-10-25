@@ -1,1 +1,47 @@
+<%= link_to("<- Back To Topics", :controller => "book", :action => "page", :id => @topic.id) %>
+
+<fieldset id="topic_page_title">
+<legend>Topic Question</legend>
 <%= @topic.title %>
+<legend id="legend_user_and_created_at">by <%= @topic.user.email %> at <%= @topic.created_at %></legend>
+</fieldset>
+
+<fieldset id="topic_page_description">
+<legend>initial comment by topic creator...</legend>
+<%= @topic.description %>
+</fieldset>
+
+
+<fieldset>
+        <legend> Add a new Comment! </legend>
+        <%= form_for :comment, url: {action: "new_comment"}, html: {class: "nifty form"} do |f| %>
+        <%= hidden_field_tag(:user_id, @user.id) %>
+        <%= hidden_field_tag(:topic_id, @topic.id) %>
+        <%= f.label :content, "Comment Content" %>
+        <%= f.text_area :content %>
+        <%= f.submit @button_label %>
+	<% end %>
+</fieldset>
+
+<table class="comments_table" border="1">
+<tr>
+<th>Votes</th>
+<th>Upvote?</th>
+<th>Downvote?</th>
+<th>Comment</th>
+<th>User</th>
+<th>Time-Stamp</th>
+</tr>
+
+<% @topic.comments.order('created_at DESC').each do |cm| %>
+
+<tr>
+<td> BLANK </td>
+<td> BLANK </td>
+<td> BLANK </td>
+<td> <%= cm.content %> </td>
+<td> <%= cm.user.email %> </td>
+<td> <%= cm.created_at %> </td>
+</tr>
+<% end %>
+</table>

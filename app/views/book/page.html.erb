@@ -1,4 +1,17 @@
 <div class="page_top_section"> 
+
+<div class="page_add_remove_button">
+<div id="added_removed_form">
+<%= form_for @book, url: {action: "update", controller: "book"}, html: {class: "nifty_form"} do |f| %>
+  <%= hidden_field_tag(:booklist_id, @user.booklist.id) %>
+  <%= hidden_field_tag(:id, @book.id) %>
+  <%= hidden_field_tag(:created_at, @book.created_at) %>
+  <%= f.submit @button_label4 %>
+</div>
+  <div id="added_removed_notice2"><%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %></div>
+<% end %>
+</div>
+
 <div class="page_header_header">
 <strong><%= @book.title %></strong>
 </div>
@@ -159,7 +172,7 @@
 	<%= f.select(:category, [['Please select an option', nil], 'Plot', 'Character', 'Theme', 'Misc']) %>
 	<%= f.submit @button_label %>
 <% end %>
-	</fieldset class="fieldset2">
+	</fieldset>
 </div>
 
 </div>

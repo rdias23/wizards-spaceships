@@ -36,20 +36,38 @@ class BookController < ApplicationController
     
     if @books_in_book_list.include? @book.title
 	@book.booklists = @book.booklists - [@booklist]
-   	redirect_to :controller => "book", :action => "show"
-        notices = ["<strong>BOOK REMOVED!</strong>", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
-	flash[:notice] = notices.join("<br/>").html_safe 
+		if(params.has_key?(:created_at))
+			redirect_to :controller => "book", :action => "page", :id => @book.id
+                	notices = ["<strong>BOOK REMOVED!</strong>", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+                	flash[:notice] = notices.join("<br/>").html_safe
+		else
+   			redirect_to :controller => "book", :action => "show"
+        		notices = ["<strong>BOOK REMOVED!</strong>", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+			flash[:notice] = notices.join("<br/>").html_safe 
+		end
     else
      	case @books_in_book_list_length
 	   when 0 .. 15 
 		@book.booklists << @booklist
-      		redirect_to :controller => "book", :action => "show"
-		notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
-		flash[:notice] = notices.join("<br/>").html_safe
+			if(params.has_key?(:created_at))
+      				redirect_to :controller => "book", :action => "page", :id => @book.id
+                		notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+                		flash[:notice] = notices.join("<br/>").html_safe	
+			else	
+				redirect_to :controller => "book", :action => "show"
+				notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+				flash[:notice] = notices.join("<br/>").html_safe
+			end
 	   else
-		redirect_to :controller => "book", :action => "show"
-		notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
-		flash[:notice] = notices.join("<br/>").html_safe
+		if(params.has_key?(:created_at))
+			redirect_to :controller => "book", :action => "page", :id => @book.id
+                	notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
+                	flash[:notice] = notices.join("<br/>").html_safe
+		else
+			redirect_to :controller => "book", :action => "show"
+			notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
+			flash[:notice] = notices.join("<br/>").html_safe
+		end
 	   end
     end
 
@@ -62,6 +80,26 @@ class BookController < ApplicationController
 	@user = current_user
 	@topic_number = 1
 	
+	@booklist = Booklist.find(@user.booklist.id)
+
+    	@books_in_book_list = []
+
+    	@booklist.books.each do |bk|
+    	    @books_in_book_list << bk.title
+    	end
+
+
+
+
+	if @books_in_book_list.include? @book.title
+	        @button_label4 = "Remove Book from Bookshelf?"
+        else
+	        @button_label4 = "Add Book To Bookshelf?"
+        end
+
+
+
+
 	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_style != nil ? @current_style_rt = @user.ratings.where(book_id: @book.id)[0].rating_style : @current_style_rt = "none"
 	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_plot != nil ? @current_plot_rt = @user.ratings.where(book_id: @book.id)[0].rating_plot : @current_plot_rt = "none"
 	@user.ratings.where(book_id: @book.id).exists? && @user.ratings.where(book_id: @book.id)[0].rating_theme != nil ? @current_theme_rt = @user.ratings.where(book_id: @book.id)[0].rating_theme : @current_theme_rt = "none"
@@ -171,7 +209,18 @@ class BookController < ApplicationController
 
   def page_topic
 	@topic = Topic.find(params[:id])
+	@user = current_user
   end
+
+  def new_comment
+	@user = User.find(params[:user_id])
+        @topic = Topic.find(params[:topic_id])
+        @comment = Comment.create(comment_params)
+        @topic.comments << @comment
+        @user.comments << @comment
+        @topic_id = params[:topic_id]
+        redirect_to :controller => "book", :action => "page_topic", :id => @topic_id
+  end 
 
   private
   def topic_params
@@ -180,6 +229,11 @@ class BookController < ApplicationController
 
   def rating_params
     params.require(:book).permit(:book_id, :rating_style, :rating_plot, :rating_theme, :rating_characters)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:user_id, :topic_id, :content)
+
   end
 
 end
