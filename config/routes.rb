@@ -67,4 +67,5 @@ WizardsAndSpaceships::Application.routes.draw do
   post 'page_topic' => 'book#page_topic'
   post 'update' => 'book#update'
   patch 'update' => 'book#update'
+  get 'vote_topic' => 'book#vote_topic'
 end

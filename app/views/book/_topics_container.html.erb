@@ -1,0 +1,116 @@
+<div class="topics_container">
+
+<% unless @book.topics.blank? == true %>
+<h5>Newest Topic</h5>
+<table class="newest_topic_table" border="1">
+<tr>
+<th>Votes</th>
+<th>Upvote?</th>
+<th>Downvote?</th>
+<th>Title</th>
+<th>Category</th>
+<th>User</th>
+<th># of Comments</th>
+<th> View Topic Page!</th>
+</tr>
+
+<tr>
+<td>Topic#:<%= @topic_number %> </td>
+<td> Upvote? </td>
+<td> Downvote? </td>
+<td> <%= @newest_topic.title %></td>
+<td> <%= @newest_topic.category %></td>
+<td> <%= @newest_topic.user.email %></td>
+<td> <%= @newest_topic.comments.length %> Comment(s)</td>
+<td>
+
+<%= link_to(page_topic_path(:id => @newest_topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+        <div class="view_topic_button"> View Topic </div>
+<% end %>
+
+
+
+<%#= form_for :topic, url: {action: "page_topic"}, html: {class: "nifty form"} do |f| %>
+
+
+
+
+<%#= hidden_field_tag(:id, @newest_topic.id) %>
+<%#= f.submit @button_label3 %>
+<%# end %>
+
+</td>
+</tr>
+
+</table>
+
+<h5>Topics</h5>
+<table class="topic_table" border="1">
+<tr>
+<th></th>
+<th>Votes</th>
+<th>Title</th>
+<th>Category</th>
+<th>User</th>
+<th># of Comments</th>
+<th> View Topic Page!</th>
+</tr>
+
+<% @topics.each do |bkt| %>
+
+<tr>
+<td>
+
+<div id="up_down_votes_container<%= bkt.id %>" >
+<%= render :partial => 'book/up_down_votes', :locals => { :bkt => bkt } %>
+</div>
+
+
+<!--
+<%# if bkt.votes <= 0 %>
+<%#= link_to image_tag("/arrow-up.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "up", :remote => true) %>
+<%# end %>
+
+<%# if bkt.votes >= 0 %>
+<%#= link_to image_tag("/arrow-down.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "down", :remote => true) %>
+<%# end %>
+-->
+
+ </td>
+<td> 
+
+<div id="votes_topic_total_container<%= bkt.id %>">
+<%= render :partial => 'book/votes_topic_total', :locals => { :bkt => bkt } %>
+</div>
+
+<%#= bkt.votes %> 
+
+
+
+</td>
+<td> <%= bkt.title %></td>
+<td> <%= bkt.category %></td>
+<td> <%= bkt.user.email %></td>
+<td> <%= bkt.comments.length %> Comment(s)</td>
+<td>
+
+<%= link_to(page_topic_path(:id => bkt.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+        <div class="view_topic_button"> View Topic </div>
+<% end %>
+
+
+<%#= form_for :topic, url: {action: "page_topic"}, html: {class: "nifty form"} do |f| %>
+<%#= hidden_field_tag(:id, bkt.id) %>
+<%#= f.submit @button_label3 %>
+<%# end %>
+
+</td>
+</tr>
+   </div>
+   <% @topic_number = @topic_number.to_i  %>
+   <% @topic_number += 1 %>
+<% end %>
+</table>
+
+<% end %>
+</div>

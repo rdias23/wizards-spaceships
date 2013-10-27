@@ -8,7 +8,7 @@
   <%= hidden_field_tag(:created_at, @book.created_at) %>
   <%= f.submit @button_label4 %>
 </div>
-  <div id="added_removed_notice2"><%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %></div>
+  <div id="added_removed_notice2"><%= content_tag(:div, flash[:notice2], :id => "flash_notice2") if flash[:notice2] %></div>
 <% end %>
 </div>
 
@@ -177,80 +177,8 @@
 
 </div>
 
-
-<div class="topics_container">
-
-<% unless @book.topics.blank? == true %>
-<h5>Newest Topic</h5>
-<table class="newest_topic_table" border="1">
-<tr>
-<th>Votes</th>
-<th>Upvote?</th>
-<th>Downvote?</th>
-<th>Title</th>
-<th>Category</th>
-<th>User</th>
-<th># of Comments</th>
-<th> View Topic Page!</th>
-</tr>
-
-<tr>
-<td>Topic#:<%= @topic_number %> </td>
-<td> Upvote? </td>
-<td> Downvote? </td>
-<td> <%= @newest_topic.title %></td>
-<td> <%= @newest_topic.category %></td>
-<td> <%= @newest_topic.user.email %></td>
-<td> <%= @newest_topic.comments.length %> Comment(s)</td>
-<td>
-
-<%= form_for :topic, url: {action: "page_topic"}, html: {class: "nifty form"} do |f| %>
-<%= hidden_field_tag(:id, @newest_topic.id) %>
-<%= f.submit @button_label3 %>
-<% end %>
-
-</td>
-</tr>
-
-</table>
-
-<h5>Topics</h5>
-<table class="topic_table" border="1">
-<tr>
-<th>Votes</th>
-<th>Upvote?</th>
-<th>Downvote?</th>
-<th>Title</th>
-<th>Category</th>
-<th>User</th>
-<th># of Comments</th>
-<th> View Topic Page!</th>
-</tr>
-
-<% @topics.each do |bkt| %>
-  
-<tr>
-<td>Topic#:<%= @topic_number %> </td>
-<td> Upvote? </td>
-<td> Downvote? </td>
-<td> <%= bkt.title %></td>
-<td> <%= bkt.category %></td>
-<td> <%= bkt.user.email %></td>
-<td> <%= bkt.comments.length %> Comment(s)</td>
-<td> 
-
-<%= form_for :topic, url: {action: "page_topic"}, html: {class: "nifty form"} do |f| %>
-<%= hidden_field_tag(:id, bkt.id) %>
-<%= f.submit @button_label3 %>
-<% end %>
-
-</td>
-</tr>
-   </div>
-   <% @topic_number = @topic_number.to_i  %>
-   <% @topic_number += 1 %>
-<% end %>
-</table>
-
-<% end %>
+<div id="topics_container_container">
+<%= render(:partial => 'book/topics_container') %>
 </div>
+
+

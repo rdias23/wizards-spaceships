@@ -1,0 +1,7 @@
+<% if bkt.votes <= 0 %>
+<%= link_to(image_tag("/arrow-up.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "up"), :remote => true) %>
+<% end %>
+
+<% if bkt.votes >= 0 %>
+<%= link_to(image_tag("/arrow-down.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "down"), :remote => true) %>
+<% end %>

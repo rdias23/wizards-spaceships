@@ -39,7 +39,7 @@ class BookController < ApplicationController
 		if(params.has_key?(:created_at))
 			redirect_to :controller => "book", :action => "page", :id => @book.id
                 	notices = ["<strong>BOOK REMOVED!</strong>", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
-                	flash[:notice] = notices.join("<br/>").html_safe
+                	flash[:notice2] = notices.join("<br/>").html_safe
 		else
    			redirect_to :controller => "book", :action => "show"
         		notices = ["<strong>BOOK REMOVED!</strong>", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
@@ -49,20 +49,20 @@ class BookController < ApplicationController
      	case @books_in_book_list_length
 	   when 0 .. 15 
 		@book.booklists << @booklist
-			if(params.has_key?(:created_at))
-      				redirect_to :controller => "book", :action => "page", :id => @book.id
-                		notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
-                		flash[:notice] = notices.join("<br/>").html_safe	
-			else	
-				redirect_to :controller => "book", :action => "show"
-				notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
-				flash[:notice] = notices.join("<br/>").html_safe
-			end
-	   else
 		if(params.has_key?(:created_at))
-			redirect_to :controller => "book", :action => "page", :id => @book.id
-                	notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
-                	flash[:notice] = notices.join("<br/>").html_safe
+                        redirect_to :controller => "book", :action => "page", :id => @book.id
+                        notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+                        flash[:notice2] = notices.join("<br/>").html_safe
+		else
+			redirect_to :controller => "book", :action => "show"
+			notices = ["BOOK ADDED!", "(if bookshelf is open, click \"Update Bookshelf\" button to see change)"]
+			flash[:notice] = notices.join("<br/>").html_safe
+		end
+	   else 
+		if(params.has_key?(:created_at))
+                        redirect_to :controller => "book", :action => "page", :id => @book.id
+                        notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
+                        flash[:notice2] = notices.join("<br/>").html_safe
 		else
 			redirect_to :controller => "book", :action => "show"
 			notices = ["BOOKSHELF is already FULL!", "You must remove a book before adding this one!"]
@@ -161,6 +161,8 @@ class BookController < ApplicationController
 	@user = User.find(params[:user_id])
 	@book = Book.find(params[:book_id])
 	@topic = Topic.create(topic_params)
+	@topic.votes = 0
+	@topic.save
 	@user.topics << @topic
 	@book.topics << @topic
 	@book_id = params[:book_id]
@@ -209,6 +211,7 @@ class BookController < ApplicationController
 
   def page_topic
 	@topic = Topic.find(params[:id])
+	@book = @topic.book
 	@user = current_user
   end
 
@@ -220,6 +223,31 @@ class BookController < ApplicationController
         @user.comments << @comment
         @topic_id = params[:topic_id]
         redirect_to :controller => "book", :action => "page_topic", :id => @topic_id
+  end
+
+  def vote_topic
+        @user = User.find(params[:user_id])
+	@topic = Topic.find(params[:topic_id])
+	@book = @topic.book
+
+	unless @topic.votetps.where(user_id: @user.id).blank?
+		@topic.votetps.where(user_id: @user.id)[0].destroy
+	end
+
+	@votetp = Votetp.create([votetp_params])	
+	@user.votetps << @votetp
+	@topic.votetps << @votetp
+	@up_votes = (@topic.votetps.where(up_or_down: "up").length).to_i
+	@down_votes = (@topic.votetps.where(up_or_down: "down").length).to_i
+	@topic.votes = @up_votes - @down_votes
+	@topic.save
+
+	@topic_id = params[:topic_id]
+
+
+	respond_to do |format|
+	    format.js {render :layout => false}
+	end
   end 
 
   private
@@ -234,6 +262,10 @@ class BookController < ApplicationController
   def comment_params
     params.require(:comment).permit(:user_id, :topic_id, :content)
 
+  end
+
+  def votetp_params
+    params.permit(:user_id, :topic_id, :up_or_down)
   end
 
 end
