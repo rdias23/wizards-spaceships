@@ -75,7 +75,7 @@ class BookController < ApplicationController
 
   def page
 	@book = Book.find(params[:id])
-	@topics = @book.topics
+	@topics = @book.topics.order('votes DESC')
 	@newest_topic = @book.topics.order('created_at DESC').first
 	@user = current_user
 	@topic_number = 1
@@ -225,6 +225,17 @@ class BookController < ApplicationController
         redirect_to :controller => "book", :action => "page_topic", :id => @topic_id
   end
 
+  def new_comment2
+        @user = User.find(params[:user_id])
+        @topic = Topic.find(params[:topic_id])
+	@comment = Comment.find(params[:comment_id])
+        @comment2 = Comment2.create(comment2_params)
+        @comment.comment2s << @comment2
+	@user.comment2s << @comment2
+        @topic_id = params[:topic_id]
+        redirect_to :controller => "book", :action => "page_topic", :id => @topic_id
+  end
+
   def vote_topic
         @user = User.find(params[:user_id])
 	@topic = Topic.find(params[:topic_id])
@@ -237,8 +248,8 @@ class BookController < ApplicationController
 	@votetp = Votetp.create([votetp_params])	
 	@user.votetps << @votetp
 	@topic.votetps << @votetp
-	@up_votes = (@topic.votetps.where(up_or_down: "up").length).to_i
-	@down_votes = (@topic.votetps.where(up_or_down: "down").length).to_i
+	@up_votes = @topic.votetps.where(up_or_down: "up").length
+	@down_votes = @topic.votetps.where(up_or_down: "down").length
 	@topic.votes = @up_votes - @down_votes
 	@topic.save
 
@@ -261,7 +272,10 @@ class BookController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:user_id, :topic_id, :content)
+  end
 
+  def comment2_params
+    params.require(:comment2).permit(:user_id, :topic_id, :comment_id, :content)
   end
 
   def votetp_params

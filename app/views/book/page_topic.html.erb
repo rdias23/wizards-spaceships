@@ -1,5 +1,23 @@
 
-<%= link_to("<- Back To Topics", :controller => "book", :action => "page", :id => @book.id) %>
+<% @topic.comments.order('created_at DESC').each do |cm| %>
+
+<% content_for :body do %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+var cm_id = "<%=j cm.id.to_s %>";
+
+$('#comment_reply_link_' + cm_id).click(function() {
+alert("Hello World!");
+return false;
+})
+})
+</script>
+<% end %>
+
+<% end %>
+<%#= link_to("<- Back To Topics", :controller => "book", :action => "page", :id => @book.id) %>
 
 <fieldset id="topic_page_title">
 <legend>Topic Question</legend>
@@ -18,31 +36,104 @@
         <%= form_for :comment, url: {action: "new_comment"}, html: {class: "nifty form"} do |f| %>
         <%= hidden_field_tag(:user_id, @user.id) %>
         <%= hidden_field_tag(:topic_id, @topic.id) %>
-        <%= f.label :content, "Comment Content" %>
+        <%= f.label :content, "Comment" %>
         <%= f.text_area :content %>
         <%= f.submit @button_label %>
 	<% end %>
 </fieldset>
 
-<table class="comments_table" border="1">
-<tr>
-<th>Votes</th>
-<th>Upvote?</th>
-<th>Downvote?</th>
-<th>Comment</th>
-<th>User</th>
-<th>Time-Stamp</th>
-</tr>
-
+<div id="comments_container">
 <% @topic.comments.order('created_at DESC').each do |cm| %>
 
-<tr>
-<td> BLANK </td>
-<td> BLANK </td>
-<td> BLANK </td>
-<td> <%= cm.content %> </td>
-<td> <%= cm.user.email %> </td>
-<td> <%= cm.created_at %> </td>
-</tr>
+<div id="comment_container_<%= cm.id %>">
+<div class="comment_header">
+<span class="comment_header_user"> <%= cm.user.email %> </span> <span class="comment_header_timestamp" %> <%= cm.created_at %> </span> </div>
+<div class="comment_content">
+<%= cm.content %>
+</div>
+
+<div id="comment_reply_<%= cm.id %>" data-no-turbolink>
+<h5><a href="#"	id="comment_reply_link_<%= cm.id %>"> Reply </a></h5>
+
+<div id="comment_partial_container_<%= cm.id %>">
+
+<fieldset>
+        <%= form_for :comment2, url: {action: "new_comment2"}, html: {class: "nifty form"} do |f| %>
+        <%= hidden_field_tag(:user_id, @user.id) %>
+        <%= hidden_field_tag(:topic_id, @topic.id) %>
+	<%= hidden_field_tag(:comment_id, cm.id) %>
+        <%= f.label :content, "Comment" %>
+        <%= f.text_area :content %>
+        <%= f.submit @button_label %>
+        <% end %>
+</fieldset>
+
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div id="comment2s_container_<%= cm.id %>">
+
+<% cm.comment2s.order('created_at DESC').each do |cm2| %>
+
+<div class="comment2_header">
+<span class="comment2_header_user"> <%= cm2.user.email %> </span> <span class="comment2_header_timestamp" %> <%= cm2.created_at %> </span>
+</div>
+
+<div class="comment2_content">
+<%= cm2.content %>
+</div>
+
 <% end %>
-</table>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<% end %>
+
+</div>
+
+<!--
+ <table class="comments_table" border="1">
+ <tr>
+ <th>Votes</th>
+ <th>Upvote?</th>
+ <th>Downvote?</th>
+ <th>Comment</th>
+ <th>User</th>
+ <th>Time-Stamp</th>
+ </tr>
+ 
+ <%# @topic.comments.order('created_at DESC').each do |cm| %>
+ 
+ <tr>
+ <td> BLANK </td>
+ <td> BLANK </td>
+ <td> BLANK </td>
+ <td> <%#= cm.content %> </td>
+ <td> <%#= cm.user.email %> </td>
+ <td> <%#= cm.created_at %> </td>
+ </tr>
+ <%# end %>
+ </table>
+-->

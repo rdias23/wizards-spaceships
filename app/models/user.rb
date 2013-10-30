@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_one :booklist
   has_many :topics
   has_many :comments
+  has_many :comment2s
   has_many :books, :through => :booklist
   has_many :suggested_books
   has_many :ratings

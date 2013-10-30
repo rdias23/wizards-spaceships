@@ -1,1 +1,3 @@
-<%= bkt.votes %>
+
+
+<span class="float_vote_up"> <%= (bkt.votetps.where(up_or_down: "up").length).to_i %> up </span> <span class="no_float_vote"> <%= bkt.votetps.where(up_or_down: "up").length - bkt.votetps.where(up_or_down: "down").length %> </span>  <span class="float_vote_down"> <%= (bkt.votetps.where(up_or_down: "down").length).to_i %> down </span> 

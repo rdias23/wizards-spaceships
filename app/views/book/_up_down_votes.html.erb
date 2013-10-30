@@ -1,7 +1,13 @@
-<% if bkt.votes <= 0 %>
-<%= link_to(image_tag("/arrow-up.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "up"), :remote => true) %>
+<% if bkt.votetps.where(:user_id => @user.id).where(:up_or_down => "up").length == 0 %>
+	<% if bkt.votetps.where(:user_id => @user.id).where(:up_or_down => "down").length == 0 %>	
+		<%= link_to(image_tag("/arrow-up.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "up"), :remote => true) %>
+		<%= link_to(image_tag("/arrow-down.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "down"), :remote => true) %>
+	<% else %>
+		<%= link_to(image_tag("/arrow-up.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "up"), :remote => true) %>
+	<% end %>
+<% else %>
+	<% if bkt.votetps.where(:user_id => @user.id).where(:up_or_down => "down").length == 0 %>
+		<%= link_to(image_tag("/arrow-down.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "down"), :remote => true) %>
+	<% end %>
 <% end %>
 
-<% if bkt.votes >= 0 %>
-<%= link_to(image_tag("/arrow-down.png", :width => '20px', :class => 'picture'), vote_topic_path(:topic_id => bkt.id, :user_id => @user.id, :up_or_down => "down"), :remote => true) %>
-<% end %>

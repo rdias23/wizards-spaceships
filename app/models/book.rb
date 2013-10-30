@@ -3,6 +3,7 @@ class Book < ActiveRecord::Base
   has_many :users, :through => :booklists
   has_many :topics
   has_many :comments, :through => :topics
+  has_many :comment2s, :through => :comments
   has_many :suggested_books
   has_many :ratings
 
