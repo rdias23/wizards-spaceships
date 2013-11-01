@@ -8,13 +8,46 @@ $(document).ready(function() {
       flexibleWidth: 210 // Optional, the maximum width of a grid item
     };
     var handler = $('.tile');
+    
     $('tiles').imagesLoaded(function() {
       // Prepare layout options.
       // Get a reference to your grid items.
       // Call the layout function.
       handler.wookmark(options);
+
+	$('tiles').imagesLoaded(function() {
+    	  // Prepare layout options.
+    	  // Get a reference to your grid items.
+    	  // Call the layout function.
+    	  handler.wookmark(options);
+		$('tiles').imagesLoaded(function() {
+    		  // Prepare layout options.
+    		  // Get a reference to your grid items.
+    		  // Call the layout function.
+    		  handler.wookmark(options);
+    		});
+    	});
     });
+
+
     handler.wookmark(options);
+
+   $(window).load(function() {
+        $('tiles').imagesLoaded(function() {
+                  // Prepare layout options.
+                  // Get a reference to your grid items.
+                  // Call the layout function.
+                  handler.wookmark(options);
+                        $(window).load(function() {
+                                $('tiles').imagesLoaded(function() {
+                                          // Prepare layout options.
+                                          // Get a reference to your grid items.
+                                          // Call the layout function.
+                                          handler.wookmark(options);
+                                        });
+                });
+                });
+});
 });
 
 

@@ -77,6 +77,8 @@ class BookController < ApplicationController
 	@book = Book.find(params[:id])
 	@topics = @book.topics.order('votes DESC')
 	@newest_topic = @book.topics.order('created_at DESC').first
+	@newest_topic_array = []
+	@newest_topic_array << @newest_topic
 	@user = current_user
 	@topic_number = 1
 	
@@ -213,6 +215,7 @@ class BookController < ApplicationController
 	@topic = Topic.find(params[:id])
 	@book = @topic.book
 	@user = current_user
+	@button_label = "Post Comment"
   end
 
   def new_comment
@@ -260,6 +263,16 @@ class BookController < ApplicationController
 	    format.js {render :layout => false}
 	end
   end 
+
+  def add_comment_reply
+	@comment = Comment.find(params[:comment_id])
+	@button_label = "Post Comment"
+
+	respond_to do |format|
+	    format.js {render :layout => false}
+	end
+  end
+
 
   private
   def topic_params

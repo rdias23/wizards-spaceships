@@ -1,0 +1,1 @@
+$( "#comment_partial_container_<%= params[:comment_id] %>" ).html( "<%= escape_javascript( render :partial => "book/comment_reply", :locals => { :user_id => params[:user_id], :topic_id => params[:topic_id], :comment_id => params[:comment_id] }) %>" );

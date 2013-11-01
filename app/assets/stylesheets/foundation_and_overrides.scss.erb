@@ -1182,14 +1182,14 @@ $row-width: 102em;
 }
 
 .new_topic  {
-		width: 400px;
 		margin-left: 80px;
+		margin-right: 0px;
 		float: left;
 }
 
 .book_ratings {
 		float: right;
-		margin-right: 50px;
+		margin-right: 100px;
 }
 
 .book_ratings_sub_1 {
@@ -1228,7 +1228,7 @@ $row-width: 102em;
 		font-size: .5em;
 }
 
-.fieldset {
+fieldset {
     		border-color:#BBB;
 		background-color: #BBB;
 		border-radius: 10px;
@@ -1238,7 +1238,7 @@ $row-width: 102em;
                 box-shadow: 10px 10px 5px #888;
 }
 
-.fieldset2 {
+fieldset2 {
    		border-color:#BBB;
    		border-style: solid;
 		border-radius: 10px;
@@ -1251,6 +1251,17 @@ $row-width: 102em;
                 box-shadow: 10px 10px 5px #888;
 }
 
+div#topic_page_add_comment {
+		position:absolute;
+		top:110px;
+		width: 100%;	
+}
+
+fieldset#topic_page_add_comment_fieldset {
+		float: none;
+		width: 100%;
+
+}
 fieldset.fieldset2 legend {
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 		font-size: 24px;
@@ -1261,7 +1272,8 @@ fieldset.fieldset2 legend {
                 box-shadow: 5px 5px 2px #888;
 }
 
-.fieldset3 {
+.fieldset3 {	
+		float: left;
 		border-color:#BBB;
 		background-color: #BBB;
 		border-radius: 10px;
@@ -1314,7 +1326,11 @@ fieldset legend {
 		box-shadow: 0px 0px 0px #FFF;
 }
 
-#topic_page_title legend#legend_user_and_created_at {
+span#topic_question_title_span {
+		width: 100%;
+}
+
+div#topic_page_top fieldset#topic_page_title legend#legend_user_and_created_at {
 		float: right;
 }
 
@@ -1370,6 +1386,14 @@ div.float_vote {
 		float: right;
 }
 
+td.topic_title { 
+		min-width: 391px; 
+}
+
+td.topic_up_down_votes_td {
+		min-width: 42px;
+}
+
 div.comment_header {
 		height: 44px;
 		background: url( /comment_header.png ) no-repeat center;
@@ -1400,6 +1424,8 @@ div.comment_content {
 }
 
 div#comments_container {
+		position: absolute;
+		top: 320px;
 		width: 686px;
 		margin-left: 124px;
 		background-color: white;
@@ -1407,4 +1433,33 @@ div#comments_container {
 		-moz-box-shadow: 10px 10px 5px #888;
                 -webkit-box-shadow: 10px 10px 5px #888;
                 box-shadow: 10px 10px 5px #888;
+}
+
+div.comment2_header {
+		height: 44px;
+                background: url( /comment_header2.png ) no-repeat center;
+}
+
+span.comment2_header_user {
+		display: block;
+                width: 200px;
+                padding-top: 6px;
+                margin-left: 48px;
+                float: left;
+}
+
+span.comment2_header_timestamp {
+                display: black;
+                width: 200px;
+                padding-top: 6px;
+                margin-right: 24px;
+                float: right;
+}
+
+div.comment2_content {
+                margin-left: 32px;
+                margin-right: 8px;
+                margin-top: 0px;
+                margin-bottom: 6px;
+                padding-top: 0px;
 }

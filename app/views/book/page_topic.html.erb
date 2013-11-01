@@ -19,9 +19,10 @@ return false;
 <% end %>
 <%#= link_to("<- Back To Topics", :controller => "book", :action => "page", :id => @book.id) %>
 
+<div id="topic_page_top">
 <fieldset id="topic_page_title">
 <legend>Topic Question</legend>
-<%= @topic.title %>
+<span id="topic_question_title_span"><%= @topic.title %></span>
 <legend id="legend_user_and_created_at">by <%= @topic.user.email %> at <%= @topic.created_at %></legend>
 </fieldset>
 
@@ -29,9 +30,10 @@ return false;
 <legend>initial comment by topic creator...</legend>
 <%= @topic.description %>
 </fieldset>
+</div>
 
-
-<fieldset>
+<div id="topic_page_add_comment">
+<fieldset id="topic_page_add_comment_fieldset">
         <legend> Add a new Comment! </legend>
         <%= form_for :comment, url: {action: "new_comment"}, html: {class: "nifty form"} do |f| %>
         <%= hidden_field_tag(:user_id, @user.id) %>
@@ -41,6 +43,8 @@ return false;
         <%= f.submit @button_label %>
 	<% end %>
 </fieldset>
+
+</div>
 
 <div id="comments_container">
 <% @topic.comments.order('created_at DESC').each do |cm| %>
@@ -53,20 +57,23 @@ return false;
 </div>
 
 <div id="comment_reply_<%= cm.id %>" data-no-turbolink>
-<h5><a href="#"	id="comment_reply_link_<%= cm.id %>"> Reply </a></h5>
+<!--		<h5><a href="#"	id="comment_reply_link_<%#= cm.id %>"> Reply </a></h5> -->
+<%= link_to(image_tag("/reply.png", :width => '60px', :class => 'picture'), add_comment_reply_path(:topic_id => @topic.id, :user_id => @user.id, :comment_id => cm.id), :remote => true) %>
 
 <div id="comment_partial_container_<%= cm.id %>">
 
+<!--
 <fieldset>
-        <%= form_for :comment2, url: {action: "new_comment2"}, html: {class: "nifty form"} do |f| %>
-        <%= hidden_field_tag(:user_id, @user.id) %>
-        <%= hidden_field_tag(:topic_id, @topic.id) %>
-	<%= hidden_field_tag(:comment_id, cm.id) %>
-        <%= f.label :content, "Comment" %>
-        <%= f.text_area :content %>
-        <%= f.submit @button_label %>
-        <% end %>
+        <%#= form_for :comment2, url: {action: "new_comment2"}, html: {class: "nifty form"} do |f| %>
+        <%#= hidden_field_tag(:user_id, @user.id) %>
+        <%#= hidden_field_tag(:topic_id, @topic.id) %>
+	<%#= hidden_field_tag(:comment_id, cm.id) %>
+        <%#= f.label :content, "Comment" %>
+        <%#= f.text_area :content %>
+        <%#= f.submit @button_label %>
+        <%# end %>
 </fieldset>
+-->
 
 </div>
 </div>

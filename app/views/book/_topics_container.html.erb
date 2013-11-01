@@ -4,9 +4,8 @@
 <h5>Newest Topic</h5>
 <table class="newest_topic_table" border="1">
 <tr>
-<th>Votes</th>
-<th>Upvote?</th>
-<th>Downvote?</th>
+<th></th>
+<th>Net Votes</th>
 <th>Title</th>
 <th>Category</th>
 <th>User</th>
@@ -14,17 +13,30 @@
 <th> View Topic Page!</th>
 </tr>
 
+<% @newest_topic_array.each do |bkt| %>
+
 <tr>
-<td>Topic#:<%= @topic_number %> </td>
-<td> Upvote? </td>
-<td> Downvote? </td>
-<td> <%= @newest_topic.title %></td>
-<td> <%= @newest_topic.category %></td>
-<td> <%= @newest_topic.user.email %></td>
-<td> <%= @newest_topic.comments.length %> Comment(s)</td>
+<td class="topic_up_down_votes_td"> 
+
+<div id="up_down_votes_container<%= bkt.id %>" >
+<%= render :partial => 'book/up_down_votes', :locals => { :bkt => bkt } %>
+</div>
+
+</td>
+<td> 
+
+<div id="votes_topic_total_container<%= bkt.id %>">
+<%= render :partial => 'book/votes_topic_total', :locals => { :bkt => bkt } %>
+</div>
+
+</td>
+<td class="topic_title"> <%= bkt.title %></td>
+<td> <%= bkt.category %></td>
+<td> <%= bkt.user.email %></td>
+<td> <%= bkt.comments.length %> Comment(s)</td>
 <td>
 
-<%= link_to(page_topic_path(:id => @newest_topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+<%= link_to(page_topic_path(:id => bkt.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
         <div class="view_topic_button"> View Topic </div>
 <% end %>
 
@@ -41,6 +53,8 @@
 
 </td>
 </tr>
+
+<% end %>
 
 </table>
 
@@ -59,7 +73,7 @@
 <% @topics.each do |bkt| %>
 
 <tr>
-<td>
+<td class="topic_up_down_votes_td">
 
 <div id="up_down_votes_container<%= bkt.id %>" >
 <%= render :partial => 'book/up_down_votes', :locals => { :bkt => bkt } %>
@@ -88,7 +102,7 @@
 
 
 </td>
-<td> <%= bkt.title %></td>
+<td class="topic_title"> <%= bkt.title %></td>
 <td> <%= bkt.category %></td>
 <td> <%= bkt.user.email %></td>
 <td> <%= bkt.comments.length %> Comment(s)</td>
