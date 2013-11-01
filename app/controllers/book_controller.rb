@@ -152,7 +152,7 @@ class BookController < ApplicationController
 	@book_comment_last_created_at = "--"
 	@book_comment_last_created_at_topic = "--"
 	(@book_comment_last_created_at = @book.comments.last.created_at.to_formatted_s(:short)) if (@book.comments.last != nil)
-	(@book_comment_last_created_at_topic = @book.comments.last.topic.title) if (@book.comments.last != nil)
+	(@book_comment_last_created_at_topic = @book.comments.last.topic.title.slice!(0..50)) if (@book.comments.last != nil)
 
 	@button_label3 = "View Topic Page"
 
