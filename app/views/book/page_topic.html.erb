@@ -18,7 +18,7 @@ return false;
 
 <% end %>
 <%#= link_to("<- Back To Topics", :controller => "book", :action => "page", :id => @book.id) %>
-
+<div id="topic_page_header_container">
 <div id="topic_page_top">
 <fieldset id="topic_page_title">
 <legend>Topic Question</legend>
@@ -31,8 +31,7 @@ return false;
 <%= @topic.description %>
 </fieldset>
 </div>
-
-<div id="topic_page_add_comment">
+<div id="topic_page_add_comment-----------------z">
 <fieldset id="topic_page_add_comment_fieldset">
         <legend> Add a new Comment! </legend>
         <%= form_for :comment, url: {action: "new_comment"}, html: {class: "nifty form"} do |f| %>
@@ -46,8 +45,10 @@ return false;
 
 </div>
 
+</div>
+
 <div id="comments_container">
-<% @topic.comments.order('created_at DESC').each do |cm| %>
+<% @topic.comments.order('created_at ASC').each do |cm| %>
 
 <div id="comment_container_<%= cm.id %>">
 <div class="comment_header">
@@ -90,7 +91,7 @@ return false;
 
 <div id="comment2s_container_<%= cm.id %>">
 
-<% cm.comment2s.order('created_at DESC').each do |cm2| %>
+<% cm.comment2s.order('created_at ASC').each do |cm2| %>
 
 <div class="comment2_header">
 <span class="comment2_header_user"> <%= cm2.user.email %> </span> <span class="comment2_header_timestamp" %> <%= cm2.created_at %> </span>
