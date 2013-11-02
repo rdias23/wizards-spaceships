@@ -1,0 +1,8 @@
+	<%= form_for :comment3, url: {action: "new_comment3"}, html: {class: "nifty form"} do |f| %>
+        <%= hidden_field_tag(:user_id, params[:user_id]) %>
+        <%= hidden_field_tag(:topic_id, params[:topic_id]) %>
+        <%= hidden_field_tag(:comment2_id, params[:comment2_id]) %>
+        <%= f.label :content, "Comment" %>
+        <%= f.text_area :content %>
+        <%= f.submit @button_label %>
+        <% end %>

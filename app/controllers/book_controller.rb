@@ -239,6 +239,17 @@ class BookController < ApplicationController
         redirect_to :controller => "book", :action => "page_topic", :id => @topic_id
   end
 
+  def new_comment3
+        @user = User.find(params[:user_id])
+        @topic = Topic.find(params[:topic_id])
+        @comment2 = Comment2.find(params[:comment2_id])
+        @comment3 = Comment3.create(comment3_params)
+        @comment2.comment3s << @comment3
+        @user.comment3s << @comment3
+        @topic_id = params[:topic_id]
+        redirect_to :controller => "book", :action => "page_topic", :id => @topic_id
+  end
+
   def vote_topic
         @user = User.find(params[:user_id])
 	@topic = Topic.find(params[:topic_id])
@@ -273,6 +284,15 @@ class BookController < ApplicationController
 	end
   end
 
+  def add_comment2_reply
+        @comment2 = Comment2.find(params[:comment2_id])
+        @button_label = "Post Comment"
+
+        respond_to do |format|
+            format.js {render :layout => false}
+        end
+  end
+
 
   private
   def topic_params
@@ -289,6 +309,10 @@ class BookController < ApplicationController
 
   def comment2_params
     params.require(:comment2).permit(:user_id, :topic_id, :comment_id, :content)
+  end
+
+  def comment3_params
+    params.require(:comment3).permit(:user_id, :topic_id, :comment2_id, :content)
   end
 
   def votetp_params

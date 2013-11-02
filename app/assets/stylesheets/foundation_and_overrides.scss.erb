@@ -1239,31 +1239,13 @@ fieldset {
                 box-shadow: 10px 10px 5px #888;
 }
 
-fieldset2 {
-   		border-color:#BBB;
-   		border-style: solid;
-		border-radius: 10px;
-   		padding: 5px;
-		background-color: #BBB;
-		font-size: 7px;
-		margin-right: 100px;
-		-moz-box-shadow: 10px 10px 5px #888;
-                -webkit-box-shadow: 10px 10px 5px #888;
-                box-shadow: 10px 10px 5px #888;
-}
 
 
 div#topic_page_add_comment {
-		position:absolute;
-		top:110px;
-		width: 100%;	
-}
 
-fieldset#topic_page_add_comment_fieldset {
-		float: none;
-		width: 100%;
 
 }
+
 fieldset.fieldset2 legend {
 		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 		font-size: 24px;
@@ -1307,6 +1289,10 @@ fieldset legend {
 		width: 100%;
 }
 
+#topic_page_title_and_description_fieldsets {
+		float: none;
+}
+
 #topic_page_title {
 		font-size: 44px;
 		padding: 0px;
@@ -1332,7 +1318,7 @@ span#topic_question_title_span {
 		width: 100%;
 }
 
-div#topic_page_top fieldset#topic_page_title legend#legend_user_and_created_at {
+fieldset#topic_page_title legend#legend_user_and_created_at {
 		float: right;
 }
 
@@ -1350,6 +1336,21 @@ div#topic_page_top fieldset#topic_page_title legend#legend_user_and_created_at {
                 -webkit-box-shadow: 10px 10px 5px #888;
                 box-shadow: 10px 10px 5px #888;
                 float: right;
+}
+
+
+
+div#topic_page_add_comment {
+		margin-left: 80px;
+		margin-right: 80px;
+		margin-bottom: 20px;
+		border-color:#BBB;
+                background-color: #BBB;
+                border-radius: 10px;
+                border-style: solid;
+                -moz-box-shadow: 10px 10px 5px #888;
+                -webkit-box-shadow: 10px 10px 5px #888;
+                box-shadow: 10px 10px 5px #888;
 }
 
 #topic_page_description legend {
@@ -1462,4 +1463,9 @@ div.comment2_content {
                 margin-top: 0px;
                 margin-bottom: 6px;
                 padding-top: 0px;
+}
+
+div[id*='comment_partial_container_'] {
+		margin-left: 4px;
+		margin-right: 4px;
 }
