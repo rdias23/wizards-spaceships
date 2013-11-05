@@ -72,6 +72,9 @@ class HomeController < ApplicationController
 
 	@notificationct = @user.notificationct
 
+	if(params.has_key?(:id))
+		@notificationct.update_attributes!(notificationct_params)
+	end
 
         @topics = []
         @comments = []
@@ -118,4 +121,64 @@ class HomeController < ApplicationController
         format.js {render :layout => false}  
     end
   end
+  
+  def notificationct
+
+	@user = current_user
+        @user_books = @user.books
+
+	@notificationct = @user.notificationct
+
+        @notificationct.update_attributes!(notificationct_params)
+
+	@topics = []
+        @comments = []
+        @comment2s = []
+        @comment3s = []
+        @notification_area_array = []
+
+        @user_books.each do |ub|
+                ub.topics.each do |ubtp|
+                        @topics << ubtp
+                end
+
+                ub.comments.each do |ubcm|
+                        @comments << ubcm
+                end
+
+                ub.comments.each do |ubcm2|
+                        @comment2s << ubcm2
+                end
+
+                ub.comments.each do |ubcm3|
+                        @comment3s << ubcm3
+                end
+        end
+
+
+        @topics.each { |tp| @notification_area_array << tp }
+        @comments.each { |tp| @notification_area_array << tp }
+        @comment2s.each { |tp| @notification_area_array << tp }
+        @comment3s.each { |tp| @notification_area_array << tp }
+
+        @notificationct.time = (@notificationct.days).days.ago
+        @notification_area_array_filtered = []
+
+        @notification_area_array.each do |naa|
+                if(naa.created_at >= @notificationct.time)
+                        @notification_area_array_filtered << naa
+                end
+        end
+
+        @notification_area_array_filtered_and_sorted = @notification_area_array_filtered.sort_by{|e| e[:created_at]}.reverse
+
+    respond_to do | format |
+        format.js {render :layout => false}
+    end
+
+  end
+
+  def notificationct_params
+    params.require(:notificationct).permit(:days)
+  end  
 end

@@ -30,6 +30,13 @@
 
 <div id="notification_area">
 
+	<%= form_for(:notificationct, remote: true) do |f| %>
+                <%= hidden_field_tag(:user_id, @notificationct.user_id) %>
+                <%= hidden_field_tag(:id, @notificationct.id) %>
+                <%= f.select :days, [['for last day only', 1], ['for last two days', 2], ['for last three days', 3], ['for last four days', 4], ['for last five days', 5], ['for last six days', 6], ['for last seven days', 7], ['for last eight days', 8], ['for last nine days', 9], ['for last ten days', 10]], {}, :onChange=>"javascript: this.form.update_button_name.click();" %>
+           <span class="hide_this_thing"><%= f.submit "Update", :name => "update_button_name", :remote => "true" %></span>
+        <% end %>
+
 <% @notification_area_array_filtered_and_sorted.each do |naaf| %>
 
 	<% if (naaf.instance_of?(Topic) == false) %>

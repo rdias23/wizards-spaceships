@@ -59,6 +59,9 @@ WizardsAndSpaceships::Application.routes.draw do
   root :to => "home#landing"
   resources :book
   get 'update_side_menu' => 'home#update_side_menu'
+  post 'update_side_menu' => 'home#update_side_menu'
+  get 'notificationct' => 'home#notificationct'
+  patch 'notificationct' => 'home#notificationct'
   get 'page' => 'book#page'
   post 'new_topic' => 'book#new_topic'
   post 'new_comment' => 'book#new_comment'
