@@ -25,14 +25,20 @@ return false;
 <fieldset id="topic_page_title">
 <legend>Topic Question</legend>
 <span id="topic_question_title_span"><%= @topic.title %></span>
-<legend id="legend_user_and_created_at">by <%= @topic.user.email %> at <%= @topic.created_at %></legend>
+<legend id="legend_user_and_created_at">by <%= @topic.user.email %> at <%= @topic.created_at.strftime("%B %e, %Y at %I:%M %p") %></legend>
 </fieldset>
 
 <fieldset id="topic_page_description">
 <legend>initial comment by topic creator...</legend>
 <%= @topic.description %>
 </fieldset>
-</br></br></br></br></br></br></br>
+
+<fieldset id="topic_page_last_comment">
+<legend>last comment by <%= (@last_comment.user.email) if (@last_comment != nil) %> </legend>
+<%= (@last_comment.content) if (@last_comment != nil) %>
+</fieldset>
+
+</br></br></br></br></br></br></br></br></br>
 </div>
 
 <div id="topic_page_add_comment">
@@ -41,7 +47,7 @@ return false;
         <%= hidden_field_tag(:topic_id, @topic.id) %>
         <%= f.label :content, "Comment" %>
         <%= f.text_area :content %>
-        <%= f.submit @button_label %>
+        <%= f.submit @button_label, :class => 'radius button tiny secondary' %>
 	<% end %>
 </div>
 
@@ -52,7 +58,7 @@ return false;
 
 <div id="comment_container_<%= cm.id %>">
 <div class="comment_header">
-<span class="comment_header_user"> <%= cm.user.email %> </span> <span class="comment_header_timestamp" %> <%= cm.created_at %> </span> </div>
+<span class="comment_header_user"> <%= cm.user.email %> </span> <span class="comment_header_timestamp" %> <%= cm.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span> </div>
 <div class="comment_content">
 <%= cm.content %>
 </div>
@@ -86,7 +92,7 @@ return false;
 <% cm.comment2s.order('created_at ASC').each do |cm2| %>
 
 <div class="comment2_header">
-<span class="comment2_header_user"> <%= cm2.user.email %> </span> <span class="comment2_header_timestamp" %> <%= cm2.created_at %> </span>
+<span class="comment2_header_user"> <%= cm2.user.email %> </span> <span class="comment2_header_timestamp" %> <%= cm2.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
 </div>
 
 <div class="comment2_content">
@@ -108,13 +114,13 @@ return false;
 <% cm2.comment3s.order('created_at ASC').each do |cm3| %>
 
 <div class="comment3_header">
-<span class="comment3_header_user"> <%= cm3.user.email %> </span> <span class="comment3_header_timestamp" %> <%= cm3.created_at %> </span>
+<span class="comment3_header_user"> <%= cm3.user.email %> </span> <span class="comment3_header_timestamp" %> <%= cm3.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
 </div>
 
 <div class="comment3_content">
 <%= cm3.content %>
 </div>
-</div> <!-- end div for id "comments3_content" -->
+</div> <!-- end div for id "comments3_container" -->
 
 
 
@@ -153,7 +159,7 @@ return false;
  <td> BLANK </td>
  <td> <%#= cm.content %> </td>
  <td> <%#= cm.user.email %> </td>
- <td> <%#= cm.created_at %> </td>
+ <td> <%#= cm.created_at.strftime("%B %e, %Y at %I:%M %p") %> </td>
  </tr>
  <%# end %>
  </table>

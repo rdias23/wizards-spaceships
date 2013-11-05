@@ -8,7 +8,7 @@
   <%= hidden_field_tag(:booklist_id, @user.booklist.id) %>
   <%= hidden_field_tag(:id, @book.id) %>
   <%= hidden_field_tag(:created_at, @book.created_at) %>
-  <%= f.submit @button_label4 %>
+  <%= f.submit @button_label4, :class => 'radius button hidden tiny secondary' %>
 </div>
   <div id="added_removed_notice2"><%= content_tag(:div, flash[:notice2], :id => "flash_notice2") if flash[:notice2] %></div>
 <% end %>
@@ -36,7 +36,7 @@
 </span></br>
 <span> <strong> NPR Rank: </strong><%= @book.rank.ordinalize %> </span></br>
 <span> <strong> Users with "Book On Shelf": </strong><%= @book.users.length %> </span></br>
-<span> <strong> Topics: </strong> <%= @book.topics.length %> <strong>, Comments: </strong> <%= @book.comments.length %> </span></br>
+<span> <strong> Topics: </strong> <%= @book.topics.length %> <strong>, Comments: </strong> <%= @book.comments.length + @book.comment2s.length + @book.comment3s.length %> </span></br>
 </div>
 </div>
 
@@ -113,15 +113,12 @@
         <%= f.text_area :description %>
         <%= f.label :category %>
         <%= f.select(:category, [['Please select an option', nil], 'Plot', 'Character', 'Theme', 'Misc']) %>
-        <%= f.submit @button_label %>
+        <%= f.submit @button_label, :class => 'radius button hidden tiny secondary' %>
 <% end %>
         </fieldset>
 </div>
 
 </div>
-
-
-
 
 <div class="book_ratings">
         <%= form_for @book, url: {action: "rate_book"}, html: {class: "nifty form"} do |f| %>
@@ -173,7 +170,7 @@
                 </fieldset>
         </div>
         <div class="book_ratings_submit">
-                <%= f.submit @button_label_2 %>
+                <%= f.submit @button_label_2, :class => 'radius button tiny secondary' %>
                 <div id="rating_notice"><%= content_tag(:div, flash[:notice], :id => "flash_notice2") if flash[:notice] %></div>
 
         </div>

@@ -33,7 +33,7 @@
 <td class="topic_title"> <%= bkt.title %></td>
 <td> <%= bkt.category %></td>
 <td> <%= bkt.user.email %></td>
-<td> <%= bkt.comments.length %> Comment(s)</td>
+<td> <%= bkt.comments.length + bkt.comment2s.length + bkt.comment3s.length %> Comment(s)</td>
 <td>
 
 <%= link_to(page_topic_path(:id => bkt.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
@@ -105,7 +105,7 @@
 <td class="topic_title"> <%= bkt.title %></td>
 <td> <%= bkt.category %></td>
 <td> <%= bkt.user.email %></td>
-<td> <%= bkt.comments.length %> Comment(s)</td>
+<td> <%= bkt.comments.length + bkt.comment2s.length + bkt.comment3s.length %> Comment(s)</td>
 <td>
 
 <%= link_to(page_topic_path(:id => bkt.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>

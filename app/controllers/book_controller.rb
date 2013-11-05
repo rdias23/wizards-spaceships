@@ -151,8 +151,8 @@ class BookController < ApplicationController
 
 	@book_comment_last_created_at = "--"
 	@book_comment_last_created_at_topic = "--"
-	(@book_comment_last_created_at = @book.comments.last.created_at.to_formatted_s(:short)) if (@book.comments.last != nil)
-	(@book_comment_last_created_at_topic = @book.comments.last.topic.title.slice!(0..50)) if (@book.comments.last != nil)
+	(@book_comment_last_created_at = @book.comments.last.created_at.strftime("%B %e, %Y at %I:%M %p")) if (@book.comments.last != nil)
+	(@book_comment_last_created_at_topic = @book.comments.last.topic.title.slice!(0..46)) if (@book.comments.last != nil)
 
 	@button_label3 = "View Topic Page"
 
@@ -207,12 +207,21 @@ class BookController < ApplicationController
 		redirect_to :controller => "book", :action => "page", :id => @book.id
         	flash[:notice] = "Book has been rated!"
 	end
-
 	
   end
 
   def page_topic
 	@topic = Topic.find(params[:id])
+	@topic_comments_array = Array.new
+	@topic_comment_last = @topic.comments.order('created_at ASC').last
+	(@topic_comments_array << @topic_comment_last) if (@topic_comment_last != nil)
+	@topic_comment2_last = @topic.comment2s.order('created_at ASC').last
+	(@topic_comments_array << @topic_comment2_last) if (@topic_comment2_last != nil)
+	@topic_comment3_last = @topic.comment3s.order('created_at ASC').last
+	(@topic_comments_array << @topic_comment3_last) if (@topic_comment3_last != nil)
+
+	(@last_comment = @topic_comments_array.sort_by{|e| e[:created_at]}.last) if (@topic_comments_array != [])	
+
 	@book = @topic.book
 	@user = current_user
 	@button_label = "Post Comment"

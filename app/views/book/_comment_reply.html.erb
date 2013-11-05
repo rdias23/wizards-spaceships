@@ -4,5 +4,5 @@
         <%= hidden_field_tag(:comment_id, params[:comment_id]) %>
         <%= f.label :content, "Comment" %>
         <%= f.text_area :content %>
-        <%= f.submit @button_label %>
+        <%= f.submit @button_label, :class => 'radius button tiny secondary' %>
         <% end %>

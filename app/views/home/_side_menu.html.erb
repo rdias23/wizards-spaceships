@@ -28,3 +28,29 @@
 </div>
 </div>
 
+<div id="notification_area">
+
+<% @notification_area_array_filtered_and_sorted.each do |naaf| %>
+
+	<% if (naaf.instance_of?(Topic) == false) %>
+	<div class="new_comment_notification">
+                <span class="new_comment_notification_boot_title"> New Comment for Book: <%= naaf.topic.book.title %> </span></br>
+		<span class="new_comment_notification_topic_title"> Topic: <%= naaf.topic.title %> </span></br>
+                <span class="new_comment_notification_created_by"> created by: <%= naaf.user.email %> </span></br>
+
+		<%= naaf.created_at %>
+        </div>
+	<% else %>
+	<div class="new_topic_notification">
+		<span class="new_topic_notification_book_title"> New Topic for Book: <%= naaf.book.title %> </span></br>
+		<span class="new_topic_notification_topic_title"> Topic: <%= naaf.title %> </span></br> 
+		<span class="new_topic_notification_created_by"> created by: <%= naaf.user.email %> </span></br>
+
+		<%= naaf.created_at %>		
+	</div>
+	<% end %>
+
+
+<% end %>
+</div>
+

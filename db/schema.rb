@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131102011629) do
+ActiveRecord::Schema.define(version: 20131104201851) do
 
   create_table "booklists", force: true do |t|
     t.integer  "user_id"
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 20131102011629) do
 
   add_index "comments", ["topic_id"], name: "index_comments_on_topic_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "notificationcts", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "time"
+    t.integer  "days",       default: 3
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ratings", force: true do |t|
     t.integer  "user_id"

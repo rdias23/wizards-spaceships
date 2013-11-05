@@ -1144,23 +1144,27 @@ $row-width: 102em;
 .page_header .stats .fieldset2 .stats_container1 .inner_stats_container {
 		float:none;
 		min-width: 220px;
+		text-align: left;
 }
 
 .page_header .stats .fieldset2 .stats_container2 {
 		float: left;
+		margin-left: 30px;
 }
 
 .page_header .stats .fieldset2 .stats_container2 .inner_stats_container {
                 float: none;
 		min-width: 220px;
+		text-align: left;
 }
  
 .page_header .stats .fieldset2 .stats_container3 {
 		float: right;
 }
 
-.page_header .stats .fieldset2 .stats_container3 {
+.page_header .stats .fieldset2 .stats_container3 .inner_stats_container {
                 float: left;
+		text-align: right;
 }
 
 
@@ -1329,6 +1333,7 @@ fieldset#topic_page_title legend#legend_user_and_created_at {
                 margin-left: 20px;
 		margin-top: 0px;
                 margin-right: 20px;
+		margin-bottom: 0px;
                 border-color:#BBB;
                 background-color: #FFF;
                 border-radius: 10px;
@@ -1338,7 +1343,21 @@ fieldset#topic_page_title legend#legend_user_and_created_at {
                 float: right;
 }
 
-
+#topic_page_last_comment {
+                font-size: 14px;
+                padding: 0px;
+                width: 90%;
+                margin-left: 20px;
+                margin-top: 0px;
+                margin-right: 20px;
+                border-color:#BBB;
+                background-color: #FFF;
+                border-radius: 10px;
+                -moz-box-shadow: 10px 10px 5px #888;
+                -webkit-box-shadow: 10px 10px 5px #888;
+                box-shadow: 10px 10px 5px #888;
+                float: right;
+}
 
 div#topic_page_add_comment {
 		margin-left: 80px;
@@ -1357,6 +1376,12 @@ div#topic_page_add_comment {
 		background-color: #FFF;
 		box-shadow: 0px 0px 0px #FFF;
 		font-size: 14px;
+}
+
+#topic_page_last_comment legend {
+                background-color: #FFF;
+                box-shadow: 0px 0px 0px #FFF;
+                font-size: 14px;
 }
 
 table.comments_table {
@@ -1411,6 +1436,7 @@ span.comment_header_user {
 }
 
 span.comment_header_timestamp {
+		font-size: 10px;
 		display: black;
 		width: 200px;
 		padding-top: 6px;
@@ -1441,6 +1467,11 @@ div.comment2_header {
                 background: url( /comment_header2.png ) no-repeat center;
 }
 
+div.comment3_header {
+                height: 44px;
+                background: url( /comment_header3.png ) no-repeat center;
+}
+
 span.comment2_header_user {
 		display: block;
                 width: 200px;
@@ -1449,11 +1480,29 @@ span.comment2_header_user {
                 float: left;
 }
 
-span.comment2_header_timestamp {
-                display: black;
+span.comment3_header_user {
+                display: block;
                 width: 200px;
                 padding-top: 6px;
-                margin-right: 24px;
+                margin-left: 72px;
+                float: left;
+}
+
+span.comment2_header_timestamp {
+                font-size: 10px;
+		display: black;
+                width: 200px;
+                padding-top: 6px;
+                margin-right: 48px;
+                float: right;
+}
+
+span.comment3_header_timestamp {
+                font-size: 10px;
+		display: black;
+                width: 200px;
+                padding-top: 6px;
+                margin-right: 72px;
                 float: right;
 }
 
@@ -1465,7 +1514,28 @@ div.comment2_content {
                 padding-top: 0px;
 }
 
+div.comment3_content {
+                margin-left: 56px;
+                margin-right: 8px;
+                margin-top: 0px;
+                margin-bottom: 6px;
+                padding-top: 0px;
+}
+
 div[id*='comment_partial_container_'] {
 		margin-left: 4px;
 		margin-right: 4px;
+}
+
+div[id*='comment_partial_container2_'] {
+                margin-left: 4px;
+                margin-right: 4px;
+}
+
+div[id*='comment_reply_'] { 
+                margin-left: 4px;
+}
+
+div[id*='comment2_reply_'] {
+		margin-left: 28px;
 }
