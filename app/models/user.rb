@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :votetps
   has_one :notificationct
+  has_one :notificationtype
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -17,11 +18,14 @@ class User < ActiveRecord::Base
   
   after_create :create_booklist
   after_create :create_notificationct
+  after_create :create_notificationtype
 
   def create_notificationct
     Notificationct.create(user_id: self.id)
   end
 
-
+  def create_notificationtype
+    Notificationtype.create(user_id: self.id)
+  end
 
 end

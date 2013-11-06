@@ -29,6 +29,12 @@
 </div>
 
 <div id="notification_area">
+	<%= form_for(:notificationtype, remote: true) do |f| %>
+                <%= hidden_field_tag(:user_id, @notificationtype.user_id) %>
+                <%= hidden_field_tag(:id, @notificationtype.id) %>
+                <%= f.select :ntkind, [['Show Topics and Comments', "both"], ['Show Topics only', "topics"], ['Show Comments only', "comments"]], {}, :onChange=>"javascript: this.form.update_button_name.click();" %>
+           <span class="hide_this_thing"><%= f.submit "Update", :name => "update_button_name", :remote => "true" %></span>
+        <% end %>
 
 	<%= form_for(:notificationct, remote: true) do |f| %>
                 <%= hidden_field_tag(:user_id, @notificationct.user_id) %>

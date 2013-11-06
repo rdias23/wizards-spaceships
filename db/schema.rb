@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131104201851) do
+ActiveRecord::Schema.define(version: 20131106004726) do
 
   create_table "booklists", force: true do |t|
     t.integer  "user_id"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 20131104201851) do
     t.integer  "days",       default: 3
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "notificationtypes", force: true do |t|
+    t.integer  "user_id"
+    t.boolean  "newtopics",   default: true
+    t.boolean  "newcomments", default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ntkind"
   end
 
   create_table "ratings", force: true do |t|
