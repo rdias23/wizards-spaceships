@@ -35,24 +35,24 @@ class HomeController < ApplicationController
                         @comments << ubcm
 		end
 		
-		ub.comments.each do |ubcm2| 
+		ub.comment2s.each do |ubcm2| 
                         @comment2s << ubcm2
 		end
 
-		ub.comments.each do |ubcm3| 
+		ub.comment3s.each do |ubcm3| 
                         @comment3s << ubcm3
 		end
 	end
 
 
-	if ((@notificationtype.newtopics == true) && (@notificationtype.newcomments == true))
+	if (@notificationtype.newtopics == true && @notificationtype.newcomments == true)
 		@topics.each { |tp| @notification_area_array << tp }
 		@comments.each { |tp| @notification_area_array << tp }
 		@comment2s.each { |tp| @notification_area_array << tp }
 		@comment3s.each { |tp| @notification_area_array << tp }
-	elsif ((@notificationtype.newtopics == true) && (@notificationtype.newcomments == false))
+	elsif (@notificationtype.newtopics == true && @notificationtype.newcomments == false)
 		@topics.each { |tp| @notification_area_array << tp }
-	elsif ((@notificationtype.newtopics == false) && (@notificationtype.newcomments == true))
+	elsif (@notificationtype.newtopics == false && @notificationtype.newcomments == true)
 		@comments.each { |tp| @notification_area_array << tp }
                 @comment2s.each { |tp| @notification_area_array << tp }
                 @comment3s.each { |tp| @notification_area_array << tp }
@@ -118,24 +118,24 @@ class HomeController < ApplicationController
                         @comments << ubcm
                 end
 
-                ub.comments.each do |ubcm2|
+                ub.comment2s.each do |ubcm2|
                         @comment2s << ubcm2
                 end
 
-                ub.comments.each do |ubcm3|
+                ub.comment3s.each do |ubcm3|
                         @comment3s << ubcm3
                 end 
         end 
 
 
-	if ((@notificationtype.newtopics == true) && (@notificationtype.newcomments == true))
+	if (@notificationtype.newtopics == true && @notificationtype.newcomments == true)
                 @topics.each { |tp| @notification_area_array << tp }
                 @comments.each { |tp| @notification_area_array << tp }
                 @comment2s.each { |tp| @notification_area_array << tp }
                 @comment3s.each { |tp| @notification_area_array << tp }
-        elsif ((@notificationtype.newtopics == true) && (@notificationtype.newcomments == false))
+        elsif (@notificationtype.newtopics == true && @notificationtype.newcomments == false)
                 @topics.each { |tp| @notification_area_array << tp }
-        elsif ((@notificationtype.newtopics == false) && (@notificationtype.newcomments == true))
+        elsif (@notificationtype.newtopics == false && @notificationtype.newcomments == true)
                 @comments.each { |tp| @notification_area_array << tp }
                 @comment2s.each { |tp| @notification_area_array << tp }
                 @comment3s.each { |tp| @notification_area_array << tp }

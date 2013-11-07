@@ -29,10 +29,12 @@
 </div>
 
 <div id="notification_area">
+
+<div id="notification_area_forms">
 	<%= form_for(:notificationtype, remote: true) do |f| %>
                 <%= hidden_field_tag(:user_id, @notificationtype.user_id) %>
                 <%= hidden_field_tag(:id, @notificationtype.id) %>
-                <%= f.select :ntkind, [['Show Topics and Comments', "both"], ['Show Topics only', "topics"], ['Show Comments only', "comments"]], {}, :onChange=>"javascript: this.form.update_button_name.click();" %>
+                <%= f.select :ntkind, [['Show New Topics & Comments', "both"], ['Show New Topics only', "topics"], ['Show New Comments only', "comments"]], {}, :onChange=>"javascript: this.form.update_button_name.click();" %>
            <span class="hide_this_thing"><%= f.submit "Update", :name => "update_button_name", :remote => "true" %></span>
         <% end %>
 
@@ -42,25 +44,86 @@
                 <%= f.select :days, [['for last day only', 1], ['for last two days', 2], ['for last three days', 3], ['for last four days', 4], ['for last five days', 5], ['for last six days', 6], ['for last seven days', 7], ['for last eight days', 8], ['for last nine days', 9], ['for last ten days', 10]], {}, :onChange=>"javascript: this.form.update_button_name.click();" %>
            <span class="hide_this_thing"><%= f.submit "Update", :name => "update_button_name", :remote => "true" %></span>
         <% end %>
+</div>
 
 <% @notification_area_array_filtered_and_sorted.each do |naaf| %>
 
 	<% if (naaf.instance_of?(Topic) == false) %>
 	<div class="new_comment_notification">
-                <span class="new_comment_notification_boot_title"> New Comment for Book: <%= naaf.topic.book.title %> </span></br>
-		<span class="new_comment_notification_topic_title"> Topic: <%= naaf.topic.title %> </span></br>
-                <span class="new_comment_notification_created_by"> created by: <%= naaf.user.email %> </span></br>
+                <span class="new_comment_notification_book_title"> New Comment for Book: </span> 
 
-		<%= naaf.created_at %>
+		<span class="new_comment_notification_book_title_content">
+		<strong> 
+
+		<% if (naaf.instance_of?(Comment) == true) %>
+			<%= naaf.topic.book.title %>
+		<% elsif (naaf.instance_of?(Comment2) == true) %>
+			<%= naaf.comment.topic.book.title %>
+		<% elsif (naaf.instance_of?(Comment3) == true) %>
+			<%= naaf.comment2.comment.topic.book.title %>
+		<% end %>
+
+		</strong>
+		</span></br>
+
+		<span class="new_comment_notification_topic_title"> for Topic: </span> 
+
+		<span class="new_comment_notification_topic_title_content">
+		"
+
+		<% if (naaf.instance_of?(Comment) == true) %>
+                        <%= naaf.topic.title %>
+                <% elsif (naaf.instance_of?(Comment2) == true) %>
+                        <%= naaf.comment.topic.title %>
+                <% elsif (naaf.instance_of?(Comment3) == true) %>
+                        <%= naaf.comment2.comment.topic.title %>
+                <% end %>
+
+		"
+		</span></br>
+
+                <span class="new_comment_notification_created_by"> created by: </span> <span class="new_comment_notification_created_by_content"><%= naaf.user.email %> </span></br>
+		<span class="new_comment_notification_comment"> Comment: </span> <span class="new_comment_notification_comment_content"> 
+
+		<%= naaf.content.slice(0..70) %><% unless (naaf.content.length <= 70) %>... <% else %> <% end %> </span></br>
+		<span class="new_comment_notification_comment_created_at"> <%= naaf.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span> 
+		<span class="new_comment_notification_view_topic">
+
+		<% if (naaf.instance_of?(Comment) == true) %>
+               		<%= link_to(page_topic_path(:id => naaf.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        	<span class="notification_view_topic"> View Topic </span>
+                	<% end %> 
+		<% elsif (naaf.instance_of?(Comment2) == true) %>
+               		<%= link_to(page_topic_path(:id => naaf.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        	<span class="notification_view_topic"> View Topic </span>
+                	<% end %> 
+		<% elsif (naaf.instance_of?(Comment3) == true) %>
+               		<%= link_to(page_topic_path(:id => naaf.comment2.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        	<span class="notification_view_topic"> View Topic </span>
+                	<% end %> 
+		<% end %>
+	
+		</span>
+
         </div>
-	<% else %>
+	<% end %>
+	
+	<% if (naaf.instance_of?(Topic) == true) %>
+	
 	<div class="new_topic_notification">
-		<span class="new_topic_notification_book_title"> New Topic for Book: <%= naaf.book.title %> </span></br>
-		<span class="new_topic_notification_topic_title"> Topic: <%= naaf.title %> </span></br> 
-		<span class="new_topic_notification_created_by"> created by: <%= naaf.user.email %> </span></br>
+		<span class="new_topic_notification_book_title"> New Topic for Book:</span> <span class="new_topic_notification_book_title_content"><%= naaf.book.title %> </span></br>
+		<span class="new_topic_notification_topic_title"> Topic: </span> <span class="new_topic_notification_topic_title_content">"<%= naaf.title %>"</span></br> 
 
-		<%= naaf.created_at %>		
+		<span class="new_topic_notification_created_by"> created by: </span> <span class="new_topic_notification_created_by_content"> <%= naaf.user.email %> </span></br>
+
+		<span class="new_topic_notification_topic_created_at"><%= naaf.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
+		<span class="new_topic_notification_view_topic">
+		<%= link_to(page_topic_path(:id => naaf.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                	<span class="notification_view_topic"> View Topic </span>
+                <% end %>
+		</span>		
 	</div>
+
 	<% end %>
 
 

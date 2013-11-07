@@ -1551,6 +1551,108 @@ div[id*='comment2_reply_'] {
 		@extend .hide-for-xlarge;		
 }
 
+div#notification_area_forms {
+		background-color:black;
+		border-style:solid;
+		border-left-width:5px;
+		border-right-width:5px;
+		border-left-color:white;
+		border-right-color:white;
+		border-top-color:black;
+		border-bottom-color:black;
+}
+
 select#notificationtype_ntkind {
 		margin-bottom: 0px;
+		background-color:white;
+}
+
+select#notificationct_days {
+		margin-bottom: 0px;
+		background-color:white;
+}
+
+.new_comment_notification {
+		background-color:#005;
+		border-style:solid;
+		border-width:5px;
+		border-color:black;
+		color:red;				
+}
+
+.new_topic_notification {
+		background-color:#050;
+                border-style:solid;
+                border-width:5px; 
+                border-color:black;
+		color:red;
+}
+
+/*
+.new_comment_notification_book_title, .new_comment_notification_topic_title, .new_comment_notification_created_by, new_comment_notification_created_by_content, new_comment_notification_comment_content {
+		font-size: .7em;
+}
+
+.new_comment_notification_book_title_content {
+		font-style: italic;
+}
+
+.new_comment_notification_topic_title_content {
+		font-size: .8em;
+}
+*/
+
+.new_comment_notification_book_title, .new_comment_notification_book_title_content, .new_comment_notification_created_by, .new_comment_notification_created_by_content, .new_comment_notification_comment, .new_comment_notification_comment_content, .new_comment_notification_created_by, .new_comment_notification_comment_created_at {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.new_topic_notification_book_title, .new_topic_notification_book_title_content, .new_topic_notification_topic_title, .new_topic_notification_topic_title_content, .new_topic_notification_created_by, .new_topic_notification_created_by, .new_topic_notification_topic_created_at {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.new_comment_notification_book_title, .new_topic_notification_book_title {
+		font-size: .8em;
+}
+
+.new_comment_notification_book_title_content, .new_topic_notification_book_title_content {
+		font-style: italic;
+}
+
+.new_comment_notification_topic_title, .new_comment_notification_topic_title_content {
+		font-size: .8em;
+}
+
+.new_comment_notification_created_by, .new_topic_notification_created_by {
+		font-size: .8em;
+}
+
+.new_comment_notification_created_by_content, .new_topic_notification_created_by_content {
+                font-size: .8em;
+		font-style: italic;
+}
+
+.new_comment_notification_comment {
+		font-size: .8em;
+}
+
+.new_comment_notification_comment_content {
+		font-size: .8em;
+		font-style: italic;
+}
+
+.new_comment_notification_comment_created_at, .new_topic_notification_topic_created_at {
+		font-size: .5em;
+}
+
+.new_topic_notification_topic_title, .new_topic_notification_topic_title_content {
+		font-size: .8em;
+}
+
+#sidr {
+	background-color:black;
+}
+
+.notification_view_topic {
+	float: right;
+	margin-right: 5px;
 }

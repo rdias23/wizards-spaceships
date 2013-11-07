@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106004726) do
+ActiveRecord::Schema.define(version: 20131106194858) do
 
   create_table "booklists", force: true do |t|
     t.integer  "user_id"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20131106004726) do
     t.boolean  "newcomments", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ntkind"
+    t.string   "ntkind",      default: "both"
   end
 
   create_table "ratings", force: true do |t|
