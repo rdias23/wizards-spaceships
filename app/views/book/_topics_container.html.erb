@@ -18,21 +18,21 @@
 <tr>
 <td class="topic_up_down_votes_td"> 
 
-<div id="up_down_votes_container<%= bkt.id %>" >
+<div class="up_down_votes_container<%= bkt.id %>" >
 <%= render :partial => 'book/up_down_votes', :locals => { :bkt => bkt } %>
 </div>
 
 </td>
 <td> 
 
-<div id="votes_topic_total_container<%= bkt.id %>">
+<div class="votes_topic_total_container<%= bkt.id %>">
 <%= render :partial => 'book/votes_topic_total', :locals => { :bkt => bkt } %>
 </div>
 
 </td>
 <td class="topic_title"> <%= bkt.title %></td>
 <td> <%= bkt.category %></td>
-<td> <%= bkt.user.email %></td>
+<td class="topic_email"> <%= bkt.user.email %></td>
 <td> <%= bkt.comments.length + bkt.comment2s.length + bkt.comment3s.length %> Comment(s)</td>
 <td>
 
@@ -75,7 +75,7 @@
 <tr>
 <td class="topic_up_down_votes_td">
 
-<div id="up_down_votes_container<%= bkt.id %>" >
+<div class="up_down_votes_container<%= bkt.id %>" >
 <%= render :partial => 'book/up_down_votes', :locals => { :bkt => bkt } %>
 </div>
 
@@ -93,7 +93,7 @@
  </td>
 <td> 
 
-<div id="votes_topic_total_container<%= bkt.id %>">
+<div class="votes_topic_total_container<%= bkt.id %>">
 <%= render :partial => 'book/votes_topic_total', :locals => { :bkt => bkt } %>
 </div>
 
@@ -104,7 +104,7 @@
 </td>
 <td class="topic_title"> <%= bkt.title %></td>
 <td> <%= bkt.category %></td>
-<td> <%= bkt.user.email %></td>
+<td class="topic_email"> <%= bkt.user.email %></td>
 <td> <%= bkt.comments.length + bkt.comment2s.length + bkt.comment3s.length %> Comment(s)</td>
 <td>
 
