@@ -24,6 +24,10 @@ class HomeController < ApplicationController
 	@comments = []
 	@comment2s = []
 	@comment3s = []
+	@comment_reply_array = []
+	@comment2_reply_array = []
+	@topic_reply_array = []
+
 	@notification_area_array = []
 	
 	@user_books.each do |ub| 
@@ -33,14 +37,23 @@ class HomeController < ApplicationController
 
 		ub.comments.each do |ubcm| 
                         @comments << ubcm
+			if (ubcm.topic.user_id == @user.id)
+				@topic_reply_array << ubcm
+			end
 		end
 		
 		ub.comment2s.each do |ubcm2| 
                         @comment2s << ubcm2
+			if (ubcm2.comment.user_id == @user.id)
+				@comment_reply_array << ubcm2
+			end	
 		end
 
 		ub.comment3s.each do |ubcm3| 
                         @comment3s << ubcm3
+			if (ubcm3.comment2.user_id == @user.id)
+                                @comment2_reply_array << ubcm3
+                        end
 		end
 	end
 
@@ -107,6 +120,10 @@ class HomeController < ApplicationController
         @comments = []
         @comment2s = []
         @comment3s = []
+	@comment_reply_array = []
+        @comment2_reply_array = []
+        @topic_reply_array = []
+
         @notification_area_array = []
 
         @user_books.each do |ub|
@@ -116,14 +133,23 @@ class HomeController < ApplicationController
 
                 ub.comments.each do |ubcm|
                         @comments << ubcm
+			if (ubcm.topic.user_id == @user.id)
+                                @topic_reply_array << ubcm
+                        end
                 end
 
                 ub.comment2s.each do |ubcm2|
                         @comment2s << ubcm2
+			if (ubcm2.comment.user_id == @user.id)
+                                @comment_reply_array << ubcm2
+                        end
                 end
 
                 ub.comment3s.each do |ubcm3|
                         @comment3s << ubcm3
+			if (ubcm3.comment2.user_id == @user.id)
+                                @comment2_reply_array << ubcm3
+                        end
                 end 
         end 
 

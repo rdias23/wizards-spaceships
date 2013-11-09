@@ -48,6 +48,86 @@
 
 <% @notification_area_array_filtered_and_sorted.each do |naaf| %>
 
+  <% if ((@comment_reply_array.include?(naaf)) || (@comment2_reply_array.include?(naaf)) || @topic_reply_array.include?(naaf)) %>
+	<% if (naaf.instance_of?(Topic) == false) %>
+        <div class="new_comment_notification_if_is_reply">
+                <span class="new_comment_notification_book_title"> New Comment for Book: </span>
+
+                <span class="new_comment_notification_book_title_content">
+                <strong>
+
+                <% if (naaf.instance_of?(Comment) == true) %>
+                        <%= naaf.topic.book.title %>
+                <% elsif (naaf.instance_of?(Comment2) == true) %>
+                        <%= naaf.comment.topic.book.title %>
+                <% elsif (naaf.instance_of?(Comment3) == true) %>
+                        <%= naaf.comment2.comment.topic.book.title %>
+                <% end %>
+
+                </strong>
+                </span></br>
+
+                <span class="new_comment_notification_topic_title"> for Topic: </span>
+
+                <span class="new_comment_notification_topic_title_content">
+                "
+
+                <% if (naaf.instance_of?(Comment) == true) %>
+                        <%= naaf.topic.title %>
+                <% elsif (naaf.instance_of?(Comment2) == true) %>
+                        <%= naaf.comment.topic.title %>
+                <% elsif (naaf.instance_of?(Comment3) == true) %>
+                        <%= naaf.comment2.comment.topic.title %>
+                <% end %>
+
+                "
+                </span></br>
+
+                <span class="new_comment_notification_created_by"> created by: </span> <span class="new_comment_notification_created_by_content"><%= naaf.user.email %> </span></br>
+                <span class="new_comment_notification_comment"> Comment: </span> <span class="new_comment_notification_comment_content">
+
+                <%= naaf.content.slice(0..70) %><% unless (naaf.content.length <= 70) %>... <% else %> <% end %> </span></br>
+                <span class="new_comment_notification_comment_created_at"> <%= naaf.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
+                <span class="new_comment_notification_view_topic">
+
+                <% if (naaf.instance_of?(Comment) == true) %>
+                        <%= link_to(page_topic_path(:id => naaf.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                                <span class="notification_view_topic"> View Topic </span>
+                        <% end %>
+                <% elsif (naaf.instance_of?(Comment2) == true) %>
+                        <%= link_to(page_topic_path(:id => naaf.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                                <span class="notification_view_topic"> View Topic </span>
+                        <% end %>
+                <% elsif (naaf.instance_of?(Comment3) == true) %>
+                        <%= link_to(page_topic_path(:id => naaf.comment2.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                                <span class="notification_view_topic"> View Topic </span>
+                        <% end %>
+                <% end %>
+
+                </span>
+
+        </div>
+        <% end %>
+
+        <% if (naaf.instance_of?(Topic) == true) %>
+
+        <div class="new_topic_notification_if_is_reply">
+                <span class="new_topic_notification_book_title"> New Topic for Book:</span> <span class="new_topic_notification_book_title_content"><%= naaf.book.title %> </span></br>
+                <span class="new_topic_notification_topic_title"> Topic: </span> <span class="new_topic_notification_topic_title_content">"<%= naaf.title %>"</span></br>
+
+                <span class="new_topic_notification_created_by"> created by: </span> <span class="new_topic_notification_created_by_content"> <%= naaf.user.email %> </span></br>
+
+                <span class="new_topic_notification_topic_created_at"><%= naaf.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
+                <span class="new_topic_notification_view_topic">
+                <%= link_to(page_topic_path(:id => naaf.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        <span class="notification_view_topic"> View Topic </span>
+                <% end %>
+                </span>
+        </div>
+
+        <% end %>
+
+  <% else %>
 	<% if (naaf.instance_of?(Topic) == false) %>
 	<div class="new_comment_notification">
                 <span class="new_comment_notification_book_title"> New Comment for Book: </span> 
@@ -126,7 +206,7 @@
 
 	<% end %>
 
-
+  <% end %>
 <% end %>
 </div>
 
