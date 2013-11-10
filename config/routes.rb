@@ -61,6 +61,8 @@ WizardsAndSpaceships::Application.routes.draw do
   resources :book
   get 'update_side_menu' => 'home#update_side_menu'
   post 'update_side_menu' => 'home#update_side_menu'
+  get 'update_gallery' => 'home#update_gallery'
+  post 'update_gallery' => 'home#update_gallery'
   get 'page' => 'book#page'
   post 'new_topic' => 'book#new_topic'
   post 'new_comment' => 'book#new_comment'

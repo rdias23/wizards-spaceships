@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :votetps
   has_one :notificationct
   has_one :notificationtype
+  has_one :sorttype
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -19,7 +20,8 @@ class User < ActiveRecord::Base
   after_create :create_booklist
   after_create :create_notificationct
   after_create :create_notificationtype
-
+  after_create :create_sorttype
+  
   def create_notificationct
     Notificationct.create(user_id: self.id)
   end
@@ -28,4 +30,7 @@ class User < ActiveRecord::Base
     Notificationtype.create(user_id: self.id)
   end
 
+  def create_sorttype
+    Sorttype.create(user_id: self.id)
+  end
 end

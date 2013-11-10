@@ -9,6 +9,9 @@ class HomeController < ApplicationController
   def index
 	@books = Book.all
 	@user = current_user
+	@sorttype = @user.sorttype
+	@sorttype.direction = "first-forward-npr"
+	@sorttype.save
 	@user_books = @user.books
 	@top_shelf_books = @user_books[0..7].take(8)
 	
@@ -183,6 +186,84 @@ class HomeController < ApplicationController
         format.js {render :layout => false}  
     end
   end
+
+  def update_gallery
+    	@books = Book.all
+    	@user = current_user
+    	@sorttype = @user.sorttype
+    	@user_books = @user.books
+    	@top_shelf_books = @user_books[0..7].take(8)
+
+    	@bottom_shelf_books = @user_books[8] != nil ? @user_books[8..15].take(8) : []    
+
+        @sorttype.update_attributes!(sorttype_params)
+
+	if (@sorttype.skind == "npr")
+		case @sorttype.direction
+		when "backward-npr"
+                	@books = @books.sort_by{|e| e[:rank]}.reverse
+                	@sorttype.direction = "forward"
+                	@sorttype.save
+		when "first-forward-npr"
+			@books = @books.sort_by{|e| e[:rank]}.reverse
+                        @sorttype.direction = "forward"
+                        @sorttype.save	
+		else
+			@books = @books.sort_by{|e| e[:rank]}
+			@sorttype.direction = "backward-npr"
+                        @sorttype.save
+		end
+	elsif (@sorttype.skind == "title") 
+                case @sorttype.direction 
+                when "backward-title"
+                        @books = @books.sort_by{|e| e[:title]}.reverse
+                        @sorttype.direction = "forward"
+                        @sorttype.save  
+                else
+                        @books = @books.sort_by{|e| e[:title]}
+                        @sorttype.direction = "backward-title"
+                        @sorttype.save
+                end
+        elsif (@sorttype.skind == "author")
+                case @sorttype.direction
+                when "backward-author"
+                        @books = @books.sort_by{|e| e[:lastname]}.reverse
+                        @sorttype.direction = "forward"
+                        @sorttype.save
+                else
+                        @books = @books.sort_by{|e| e[:lastname]}
+                        @sorttype.direction = "backward-author"
+                        @sorttype.save
+                end
+        elsif (@sorttype.skind == "publication")
+                case @sorttype.direction
+                when "backward-publication"
+                        @books = @books.sort_by{|e| e[:publication]}.reverse
+                        @sorttype.direction = "forward"
+                        @sorttype.save
+                else
+                        @books = @books.sort_by{|e| e[:publication]}
+                        @sorttype.direction = "backward-publication"
+                        @sorttype.save
+                end
+        elsif (@sorttype.skind == "rating")
+                case @sorttype.direction
+                when "backward-rating"
+                        @books = @books.compact.sort_by{|e| e[:rating_overall] || 0.0 }
+                        @sorttype.direction = "forward"
+                        @sorttype.save
+                else
+                        @books = @books.sort_by{|e| e[:rating_overall] || 0.0 }.reverse
+                        @sorttype.direction = "backward-rating"
+                        @sorttype.save
+                end
+	else
+	end
+
+    respond_to do |format|
+	format.js {render :layout => false}
+    end
+  end
   
 
   def notificationct_params
@@ -191,6 +272,10 @@ class HomeController < ApplicationController
 
   def notificationtype_params
     params.require(:notificationtype).permit(:ntkind)
+  end
+
+  def sorttype_params
+    params.permit(:skind, :user_id, :id)
   end
   
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106194858) do
+ActiveRecord::Schema.define(version: 20131109200900) do
 
   create_table "booklists", force: true do |t|
     t.integer  "user_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20131106194858) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rank"
+    t.string   "lastname"
   end
 
   create_table "comment2s", force: true do |t|
@@ -96,6 +97,14 @@ ActiveRecord::Schema.define(version: 20131106194858) do
     t.float    "rating_plot"
     t.float    "rating_theme"
     t.float    "rating_characters"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sorttypes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "skind",      default: "npr"
+    t.string   "direction",  default: "forward"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

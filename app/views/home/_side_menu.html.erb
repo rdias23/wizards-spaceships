@@ -91,15 +91,15 @@
                 <span class="new_comment_notification_view_topic">
 
                 <% if (naaf.instance_of?(Comment) == true) %>
-                        <%= link_to(page_topic_path(:id => naaf.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        <%= link_to(page_topic_path(:id => naaf.topic.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                                 <span class="notification_view_topic"> View Topic </span>
                         <% end %>
                 <% elsif (naaf.instance_of?(Comment2) == true) %>
-                        <%= link_to(page_topic_path(:id => naaf.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        <%= link_to(page_topic_path(:id => naaf.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                                 <span class="notification_view_topic"> View Topic </span>
                         <% end %>
                 <% elsif (naaf.instance_of?(Comment3) == true) %>
-                        <%= link_to(page_topic_path(:id => naaf.comment2.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                        <%= link_to(page_topic_path(:id => naaf.comment2.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                                 <span class="notification_view_topic"> View Topic </span>
                         <% end %>
                 <% end %>
@@ -119,7 +119,7 @@
 
                 <span class="new_topic_notification_topic_created_at"><%= naaf.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
                 <span class="new_topic_notification_view_topic">
-                <%= link_to(page_topic_path(:id => naaf.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+                <%= link_to(page_topic_path(:id => naaf.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                         <span class="notification_view_topic"> View Topic </span>
                 <% end %>
                 </span>
@@ -170,15 +170,15 @@
 		<span class="new_comment_notification_view_topic">
 
 		<% if (naaf.instance_of?(Comment) == true) %>
-               		<%= link_to(page_topic_path(:id => naaf.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+               		<%= link_to(page_topic_path(:id => naaf.topic.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                         	<span class="notification_view_topic"> View Topic </span>
                 	<% end %> 
 		<% elsif (naaf.instance_of?(Comment2) == true) %>
-               		<%= link_to(page_topic_path(:id => naaf.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+               		<%= link_to(page_topic_path(:id => naaf.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                         	<span class="notification_view_topic"> View Topic </span>
                 	<% end %> 
 		<% elsif (naaf.instance_of?(Comment3) == true) %>
-               		<%= link_to(page_topic_path(:id => naaf.comment2.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+               		<%= link_to(page_topic_path(:id => naaf.comment2.comment.topic.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                         	<span class="notification_view_topic"> View Topic </span>
                 	<% end %> 
 		<% end %>
@@ -198,7 +198,7 @@
 
 		<span class="new_topic_notification_topic_created_at"><%= naaf.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
 		<span class="new_topic_notification_view_topic">
-		<%= link_to(page_topic_path(:id => naaf.id), {:data => { :colorbox => true, :colorbox_height => '800px', :colorbox_width => '956px', :colorbox_iframe => true}}) do %>
+		<%= link_to(page_topic_path(:id => naaf.id), {:data => { :colorbox => true, :colorbox_height => '1200px', :colorbox_width => '1056px', :colorbox_iframe => true}}) do %>
                 	<span class="notification_view_topic"> View Topic </span>
                 <% end %>
 		</span>		

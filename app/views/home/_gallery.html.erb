@@ -54,7 +54,44 @@ $(document).ready(function() {
 </script>
 <% end %>
 
-<center><%= image_tag("/Wizards_and_Spaceships_Logo.png", :alt => "Wizards & Spaceships Logo") %></center>
+<center><%= image_tag("/Wizards_and_Spaceships_Logo.png", :id => "wizards_and_spaceships_logo", :alt => "Wizards & Spaceships Logo") %></center>
+
+<div id="button_sort_box">
+<%= form_for(:sorttype, remote: true, :url => { :action => "update_gallery" }) do |f| %>
+                <%= hidden_field_tag(:user_id, @sorttype.user_id) %>
+                <%= hidden_field_tag(:id, @sorttype.id) %>
+		<%= hidden_field_tag(:skind, "npr") %>
+                <%= f.submit "      NPR Rank - Sort     ", :class => 'button hidden tiny success round', :id => 'button_sort_npr', :remote => "true" %>
+<% end %>		     
+
+<%= form_for(:sorttype, remote: true, :url => { :action => "update_gallery" }) do |f| %>
+		<%= hidden_field_tag(:user_id, @sorttype.user_id) %>
+                <%= hidden_field_tag(:id, @sorttype.id) %>
+		<%= hidden_field_tag(:skind, "title") %>
+                <%= f.submit "    Title Name - Sort     ", :class => 'button hidden tiny success round',  :id => 'button_sort_title', :remote => "true" %>
+<% end %>
+
+<%= form_for(:sorttype, remote: true, :url => { :action => "update_gallery" }) do |f| %>
+		<%= hidden_field_tag(:user_id, @sorttype.user_id) %>
+                <%= hidden_field_tag(:id, @sorttype.id) %>
+		<%= hidden_field_tag(:skind, "author") %>
+                <%= f.submit "Author Surname - Sort", :class => 'button hidden tiny success round',  :id => 'button_sort_author', :remote => "true" %>
+<% end %>
+
+<%= form_for(:sorttype, remote: true, :url => { :action => "update_gallery" }) do |f| %>
+		<%= hidden_field_tag(:user_id, @sorttype.user_id) %>
+                <%= hidden_field_tag(:id, @sorttype.id) %>
+		<%= hidden_field_tag(:skind, "publication") %>
+                <%= f.submit "Publication Year - Sort", :class => 'button hidden tiny success round',  :id => 'button_sort_publication', :remote => "true" %>
+<% end %>
+
+<%= form_for(:sorttype, remote: true, :url => { :action => "update_gallery" }) do |f| %>
+		<%= hidden_field_tag(:user_id, @sorttype.user_id) %>
+                <%= hidden_field_tag(:id, @sorttype.id) %>	
+		<%= hidden_field_tag(:skind, "rating") %>
+                <%= f.submit "    User Rating - Sort    ", :class => 'button hidden tiny success round',  :id => 'button_sort_rating', :remote => "true" %>
+<% end %>
+</div>
 
 <div id="main" role="main">
 

@@ -155,7 +155,7 @@ class BookController < ApplicationController
 	(@book_comment_last_created_at_topic = @book.comments.last.topic.title.slice!(0..46)) if (@book.comments.last != nil)
 
 	@button_label3 = "View Topic Page"
-
+	@book.save
 	
   end
 
