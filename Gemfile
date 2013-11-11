@@ -49,3 +49,7 @@ gem 'devise'
 gem 'zurb-foundation', '~> 4.0.0'
 
 gem 'sidr-rails'
+
+group :assets do
+  gem "chardinjs-rails"
+end

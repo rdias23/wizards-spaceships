@@ -5,6 +5,21 @@ class Wizard
     $('#simple-menu').sidr()
     $('body').on('mouseover', '.book_on_shelf', Wizard.book_shift)
     $('body').on('mouseout', '.book_on_shelf', Wizard.book_shift2) 
+    $('body').chardinJs()
+    $('body').on "chardinJs:stop", ->
+      $('#login_form2').addClass("hide")
+      console.log('chardingJs:stop')
+      $('#gear-link').data('show_form', true)
+
+    $('body').on "chardinJs:start", ->
+      console.log('chardingJs:start')
+      $('#gear-link').data('show_form', false)
+
+    $('a[data-toggle="chardinjs"]').on 'click', (e) ->
+      e.preventDefault()
+      unless(window.location.pathname == "/home/index")  
+        $('#login_form2').removeClass("hide") if $(this).data('show-form')
+      ($('body').data('chardinJs')).toggle()
 
   @show_login_form: ->
     if $('#login_form2').hasClass('hide')

@@ -55,7 +55,7 @@ $(document).ready(function() {
 <% end %>
 
 <center><%= image_tag("/Wizards_and_Spaceships_Logo.png", :id => "wizards_and_spaceships_logo", :alt => "Wizards & Spaceships Logo") %></center>
-
+<span id="button_sort_chardin" data-position=top data-intro='Sort gallery by NPR ranking, Title name, Author last name, year of publication, or user overall rating. Click twice for reverse sort!'></span>
 <div id="button_sort_box">
 <%= form_for(:sorttype, remote: true, :url => { :action => "update_gallery" }) do |f| %>
                 <%= hidden_field_tag(:user_id, @sorttype.user_id) %>

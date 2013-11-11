@@ -31,6 +31,7 @@
 <% content_for :body do %>
 <script type="text/javascript">
 	$('#side-menu').sidr().click(function() { $.ajax("/update_side_menu")});
+        $('#gear').sidr().click(function() { $.ajax("/update_side_menu")});
 	$.backstretch("/assets/hd-starry-sky.png");
 </script>
 <% end %>
@@ -42,7 +43,6 @@
 <%= render(:partial => 'home/gallery') %>
 </div>
 
-<div id="sidr">
-  <%= render(:partial => 'side_menu') %>
-</div>
+<div id="sidr" data-position=right data-intro='Add books you have read to the bookshelf by selecting them from the gallery to the right. Click on a book off the shelf to open a page listing all discussion topics for the book; select a topic and discuss! ---------------------------------------------------- Use the "notification area" below the bookshelf to check for new comments and topics created for your bookshelf books; filter results by time range and/or type.'>
+  <%= render(:partial => 'side_menu') %> </div>
 

@@ -18,10 +18,10 @@ return false;
 
 <% end %>
 <%#= link_to("<- Back To Topics", :controller => "book", :action => "page", :id => @book.id) %>
-<div id="topic_page_header_container">
+<div id="topic_page_header_container"> <!-- start div 1 - id = "topic_page_header_container" ENDED -->
 
 
-<div id="topic_page_title_and_description_fieldsets">
+<div id="topic_page_title_and_description_fieldsets"> <!-- start div 2 - id = "topic_page_title_and_description_fieldsets" ENDED -->
 <fieldset id="topic_page_title">
 <legend>Topic Question</legend>
 <span id="topic_question_title_span"><%= @topic.title %></span>
@@ -39,9 +39,9 @@ return false;
 </fieldset>
 
 </br></br></br></br></br></br></br></br></br>
-</div>
+</div> <!-- end div 2 - id = "topic_page_title_and_description_fieldsets" -->
 
-<div id="topic_page_add_comment">
+<div id="topic_page_add_comment"> <!-- start div 3 - id = "topic_page_add_comment" ENDED -->
         <%= form_for :comment, url: {action: "new_comment"}, html: {class: "nifty form"} do |f| %>
         <%= hidden_field_tag(:user_id, @user.id) %>
         <%= hidden_field_tag(:topic_id, @topic.id) %>
@@ -49,25 +49,26 @@ return false;
         <%= f.text_area :content %>
         <%= f.submit @button_label, :class => 'radius button tiny secondary' %>
 	<% end %>
-</div>
+</div> <!-- end div 3 - id = "topic_page_add_comment" -->
 
-</div>
+</div> <!-- end div 1 - id = "topic_page_header_container" -->
 
-<div id="comments_container">
-<% @topic.comments.order('created_at ASC').each do |cm| %>
+<div id="comments_container"> <!-- start div 4 - id = "comments_container" ENDED -->
+<% @topic.comments.order('created_at ASC').each do |cm| %>    
 
-<div id="comment_container_<%= cm.id %>">
-<div class="comment_header">
-<span class="comment_header_user"> <%= cm.user.email %> </span> <span class="comment_header_timestamp" %> <%= cm.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span> </div>
-<div class="comment_content">
+<div id="comment_container_<%= cm.id %>"> <!-- start div 5 - id = "comment_container_<%= cm.id %> ENDED" -->
+<div class="comment_header"> <!-- start div 6 - class = "comment_header"  ENDED -->
+<span class="comment_header_user"> <%= cm.user.email %> </span> <span class="comment_header_timestamp" %> <%= cm.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span> 
+</div> <!-- end div 6 - class = "comment_header" -->
+<div class="comment_content"> <!-- start div 7 - class = "comment_content" ENDED -->
 <%= cm.content %>
-</div>
+</div> <!-- end div 7 - class = "comment_content" -->
 
-<div id="comment_reply_<%= cm.id %>" data-no-turbolink>
+<div id="comment_reply_<%= cm.id %>" data-no-turbolink> <!-- start div 8 - id = "comment_reply_<%= cm.id %>" ENDED -->
 <!--		<h5><a href="#"	id="comment_reply_link_<%#= cm.id %>"> Reply </a></h5> -->
 <%= link_to(image_tag("/reply.png", :width => '60px', :class => 'picture'), add_comment_reply_path(:topic_id => @topic.id, :user_id => @user.id, :comment_id => cm.id), :remote => true) %>
 
-<div id="comment_partial_container_<%= cm.id %>">
+<div id="comment_partial_container_<%= cm.id %>"> <!-- start div 9 - id = id="comment_partial_container_<%= cm.id %>" ENDED -->
 
 <!--
 <fieldset>
@@ -82,50 +83,46 @@ return false;
 </fieldset>
 -->
 
-</div>
-</div> 
+</div> <!-- end div  9 - id = id="comment_partial_container_<%= cm.id %>" -->
+</div>  <!-- end div 8 - id = "comment_reply_<%= cm.id %>" --> 
 
-</div> <!-- end div for id "comment_container" -->
+</div> <!-- end div 5 - id = "comment_container_<%= cm.id %>" -->
 
-<div id="comment2s_container_<%= cm.id %>">
+<div id="comment2s_container_<%= cm.id %>"> <!-- start div 10 - id="comment2s_container_<%= cm.id %>" ENDED -->
 
 <% cm.comment2s.order('created_at ASC').each do |cm2| %>
 
-<div class="comment2_header">
+<div class="comment2_header"> <!-- start div 11 - class = "comment2_header" ENDED -->
 <span class="comment2_header_user"> <%= cm2.user.email %> </span> <span class="comment2_header_timestamp" %> <%= cm2.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
-</div>
+</div> <!-- end div 11 - class = "comment2_header -->
 
-<div class="comment2_content">
+<div class="comment2_content"> <!-- start div 12 - class = "comment2_content" ENDED-->
 <%= cm2.content %>
-</div>
+</div> <!-- end div 12 - class = "comment2_content" -->
 
-<div id="comment2_reply_<%= cm2.id %>" data-no-turbolink>
+<div id="comment2_reply_<%= cm2.id %>" data-no-turbolink>  <!-- start div 13 id = "comment2_reply_<%= cm2.id %>" ENDED -->
 <%= link_to(image_tag("/reply.png", :width => '60px', :class => 'picture'), add_comment2_reply_path(:topic_id => @topic.id, :user_id => @user.id, :comment2_id => cm2.id), :remote => true) %>
 
-<div id="comment_partial_container2_<%= cm2.id %>">
-</div>
+<div id="comment_partial_container2_<%= cm2.id %>"> <!-- start div 14 id = ""comment_partial_container2_<%= cm2.id %>" ENDED -->
+</div> <!-- end div 14 id = ""comment_partial_container2_<%= cm2.id %>" -->
 
 
-</div>
-</div> <!-- end div for id "comment2s_container" -->
+</div> <!-- end div 13 id = "comment2_reply_<%= cm2.id %>" -->
 
-<div id="comment3s_container_<% cm2.id %>">
+<div id="comment3s_container_<%= cm2.id %>"> <!-- start div 15 id = "comment3s_container_<% cm2.id %>" ENDED -->
 
 <% cm2.comment3s.order('created_at ASC').each do |cm3| %>
 
-<div class="comment3_header">
+<div class="comment3_header"> <!-- start div 16 id = "comment3_header"  ENDED -->
 <span class="comment3_header_user"> <%= cm3.user.email %> </span> <span class="comment3_header_timestamp" %> <%= cm3.created_at.strftime("%B %e, %Y at %I:%M %p") %> </span>
-</div>
+</div> <!-- end div 16 id = "comment3_header" --> 
 
-<div class="comment3_content">
+<div class="comment3_content"> <!-- start div 17 class = "comment3_content"> ENDED -->
 <%= cm3.content %>
-</div>
-</div> <!-- end div for id "comments3_container" -->
-
+</div> <!-- end div 17 class = "comment3_content"> -->
 
 
 <% end %>
-
 
 
 
@@ -135,10 +132,10 @@ return false;
 
 <% end %>
 
-
 <% end %>
-
-</div>
+</div> <!-- end div 15 id = "comment3s_container_<%#= cm2.id %>" -->
+</div> <!-- end div 10 - id = "comment2s_container_<%#= cm.id %>" -->
+</div> <!-- end div 4 - id = "comments_container" -->
 
 <!--
  <table class="comments_table" border="1">
@@ -164,3 +161,4 @@ return false;
  <%# end %>
  </table>
 -->
+

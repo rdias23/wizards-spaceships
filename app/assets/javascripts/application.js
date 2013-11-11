@@ -23,5 +23,6 @@
 
 //= require colorbox-rails
 //= require jquery.sidr
+//= require chardinjs
 
 $(document).foundation();

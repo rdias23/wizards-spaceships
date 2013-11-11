@@ -4,13 +4,19 @@
   <ul class="title-area">
     <!-- Title Area -->
     <li class="name">
-      <h1 data-position="bottom" data-intro="You can click on this link at any time to be redirected back to the this home page." style="margin-left: 10px;">
-        <a href="/">
+      <h1 data-position="bottom" data-intro="This link will take you back to the home page. Click on it at any time." style="margin-left: 10px;">
+        
+    <% if request.original_url == "http://localhost:3000/" %>
+	<a href="/">
           Wizards<span class="red">&</span>Spaceships
         </a>
+    <% else %>
+        <a href="/#">
+          Wizards<span class="red">&</span>Spaceships
+        </a>
+    <% end %>
       </h1>
     </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
   </ul>
 
   <section class="top-bar-section">
@@ -23,7 +29,7 @@
 
     <% if @auth.present?  %>
        <% if @auth.present? %> <!-- only show the below if logged in -->
-        <li class='has-dropdown'>
+        <li class='has-dropdown' data-position=right data-intro='Click here to Log Out'>
           <%= link_to('Hello, ' +  @auth.email + '!', '#') %>
         <ul class="dropdown">
            <li><%= link_to('Logout', '/users/sign_out', :method => :delete ) %></li>
@@ -38,7 +44,7 @@
     </ul>
 
   <ul class='right'>
-    <li><%= link_to(image_tag("/assets/gear.png", :size => '27x27', :id => 'gear'), "#", :'data-show-form' => true, :'data-toggle-form' => true, "data-toggle" => "chardinjs", id: 'gear-link') %></li>
+    <li><%= link_to(image_tag("/assets/gear.png", :size => '27x27', :id => 'gear'), "#sidr", :'data-show-form' => true, :'data-toggle-form' => true, "data-toggle" => "chardinjs", id: 'gear-link') %></li>
   </ul>
 
 
@@ -48,10 +54,9 @@
 <!-- End Navigation -->
 <%#= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
 
-<div id="login_form2" class="hide">
+<div id="login_form2" class="hide" data-position=right data-intro='Input your email address and password to log-in.'>
 
-<h2>Sign In</h2>
-
+<h2>Sign In </h2>
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>
@@ -68,8 +73,6 @@
 
 <%= render "devise/shared/links" %>
 </div>
-
-
 
 <div id='modals'>
   <%#= render(:partial => 'layouts/nav_bar_modals') %>
