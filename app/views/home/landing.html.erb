@@ -15,7 +15,7 @@
 
 <script>
 	function set_page() {
-		if(!(window.location.href == 'http://localhost:3000/'))
+		if(!((window.location.href == 'http://localhost:3000/') || (window.location.href == 'http://localhost:3000/##'))
 		{			
 			(window.location.href = '/');
 
@@ -29,3 +29,4 @@ set_page();
 
 
 </script>
+

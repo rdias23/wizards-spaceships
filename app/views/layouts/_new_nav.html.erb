@@ -4,7 +4,7 @@
   <ul class="title-area">
     <!-- Title Area -->
     <li class="name">
-      <h1 data-position="bottom" data-intro="This link will take you back to the home page. Click on it at any time." style="margin-left: 10px;">
+      <h1 data-position="bottom" data-intro="This link will reset the home page. Click on it at any time." style="margin-left: 10px;">
         
     <% if request.original_url == "http://localhost:3000/" %>
 	<a href="/">
@@ -53,6 +53,33 @@
 <!-- End Top Bar -->
 <!-- End Navigation -->
 <%#= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+
+<% if !@auth.present? %>
+<div id="call_to_action">
+<div class="row">
+<div class="large-3 columns screen">
+<h2> An online bookclub for lovers of great <span class="red"> science fiction </span> and <span class="red"> fantasy!</span></h2>
+<h3> Browse the <span class="red">NPR</span> top <span class="red"> 100</span></h3></br>
+<h3> Put the <span class="red">books </span> you have read onto your <span class="red">bookshelf</span></h3></br>
+<h3> Create <span class="red">Topics </span> and <span class="red">Discuss!</span></h3></br>
+<div class=learn_more_button"> 
+<%= link_to('LEARN MORE', '##', :id => 'learn-more', :class => 'button radius success small') %>
+</div>
+
+</div>
+</div>
+</div> 
+
+<div id="onboard" class="total_transparency">
+<div class="row">
+<div class="large 12 columns">
+<img src="/assets/hd-starry-sky.png">
+
+</div>
+</div>
+</div>
+
+<% end %>
 
 <div id="login_form2" class="hide" data-position=right data-intro='Input your email address and password to log-in.'>
 

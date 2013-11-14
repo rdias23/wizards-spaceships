@@ -1,8 +1,10 @@
 <div class="book_container">
 
-<div>
-<h3 id="book_title" STYLE="margin:0;padding:0;"><%= @book.title %><br STYLE="line-height:0px;margin:0;padding:0;"/>
-<span STYLE="font-size: small; color: #ffffff;margin:0;padding:0;">NPR Ranking: <%= @book.rank %></span></h3>
+<div id="book_sort_information">
+<h3 id="book_title" STYLE="margin:0;padding:0;"><%= @book.title %><br STYLE="line-height:0px;margin:0;padding:0;"/></h3>
+<h3><span STYLE="font-size: small; color: #ffffff;margin:0;padding:0;">NPR Ranking: <%= @book.rank %></span></h3>
+<h3><span STYLE="font-size: small; color: #ffffff;margin:0;padding:0;">Year Published: <%= @book.publication %></span></h3>
+<h3><span STYLE="font-size: small; color: #ffffff;margin:0;padding:0;">User Rating: <%= @book.rating_overall %></span></h3>
 </div>
 <%= image_tag(@book.picture, :width => '200px', :class => 'picture') %>
 

@@ -1019,10 +1019,14 @@ $row-width: 102em;
 .red { color:red; }
 .book_container { text-align: center;}
 
-#login_form2 { width: 300px;
+#login_form2 { 
+	       position: relative;
+	       top: -860px;
+	       left: 50px;
+	       width: 300px;
 	       margin-left: 700px;
-	       margin-top: 130px;
-
+	       margin-top: 0px;
+	
  }
 
 #login_form2 h2 {
@@ -1687,9 +1691,9 @@ img#wizards_and_spaceships_logo {
 }
 
 span#button_sort_chardin {
-		width:836px;
+		width:838px;
                 position:absolute;
-                left:402px;
+                left:380.5px;
                 top:206px;
 }
 
@@ -1704,7 +1708,7 @@ span#button_sort_chardin {
 }
 
 #button_sort_npr {
-		margin-left: 400px;
+		margin-left: 380.5px;
 }
 
 #button_sort_title, #button_sort_author, #button_sort_publication, #button_sort_rating {
@@ -1730,3 +1734,59 @@ div#forgot_password_email {
 #gear-link {
 		height: 42px;
 }
+
+.screen {
+		position: absolute;
+		top: 120px;
+		left: 300px;
+		background: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, .5);
+		padding: 10px;
+
+}
+
+#call_to_action h2 {
+		color: white;
+		font-family:Lucida Sans Unicode;
+		font-style: italic;
+		width: 350px;
+		text-align: right;
+}
+
+#call_to_action h3 {
+		color: #00FFFF;
+		font-family:Lucida Sans Unicode;
+		font-size: 1.6em;
+		margin: 0px;
+		padding: 0px;
+		line-height:26px;
+		width: 290px;
+		text-align: right;
+		margin-left: 50px;
+}
+
+#call_to_action h3 span.red {
+		font-style: italic;
+}
+
+#call_to_action #learn-more {
+		position: relative;
+		z-index:1;
+		background-color: #00FFFF;
+		float: right;
+		margin-right: 36px;
+}
+
+.total_transparency {
+		opacity: 0;
+		z-index: -1;
+}
+
+#book_sort_information h3 {
+                line-height: 2px;
+}
+
+#book_sort_information h3#book_title {
+		line-height: 24px;
+}
+
