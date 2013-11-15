@@ -7,7 +7,7 @@
       <h1 data-position="bottom" data-intro="This link will reset the home page. Click on it at any time." style="margin-left: 10px;">
         
     <% if request.original_url == "http://localhost:3000/" %>
-	<a href="/">
+	<a href="/#">
           Wizards<span class="red">&</span>Spaceships
         </a>
     <% else %>
@@ -22,7 +22,7 @@
   <section class="top-bar-section">
     <ul class="left">
      <% if @auth.blank? %>
-       <li class='name'><h1><%= link_to('Login', '#', :id => 'login-form-btn') %></h1></li>
+       <li class='name'><h1><%= link_to('Login', '##', :id => 'login-form-btn') %></h1></li>
        <li class='name' data-position=right data-intro='Click here to Register'><h1><%=link_to('Register','#', :'data-reveal-id' => 'register' ) %></h1></li>
      <% end %>
 
@@ -71,9 +71,34 @@
 </div> 
 
 <div id="onboard" class="total_transparency">
-<div class="row">
-<div class="large 12 columns">
-<img src="/assets/hd-starry-sky.png">
+
+<div class="slideshow-wrapper">
+  <div class="preloader"></div>
+<div class="slideshow-wrapper-inner">
+<ul id="featured1" data-orbit data-options="slide_number_class: hide; bullets:false;">
+  <li>
+    <img src="/assets/slider1.png" />
+    <div class="orbit-caption"><%=link_to('Sign Me Up!','#', id:'featured1_register', :class => 'button radius secondary small', :'data-reveal-id' => 'register' ) %></div>
+  </li>
+  <li>
+    <img src="/assets/slider2.png" />
+    <div class="orbit-caption"><%=link_to('Sign Me Up!','#', id:'featured1_register', :class => 'button radius secondary small', :'data-reveal-id' => 'register' ) %></div>
+  </li>
+  <li>
+    <img src="/assets/slider3.png" />
+    <div class="orbit-caption"><%=link_to('Sign Me Up!','#', id:'featured1_register', :class => 'button radius secondary small', :'data-reveal-id' => 'register' ) %></div>
+  </li>
+  <li>
+    <img src="/assets/slider4.png" />
+    <div class="orbit-caption"><%=link_to('Sign Me Up!','#', id:'featured1_register', :class => 'button radius secondary small', :'data-reveal-id' => 'register' ) %></div>
+  </li>
+  <li>
+    <img src="/assets/slider5.png" />
+    <div class="orbit-caption"><%=link_to('Sign Me Up!','#', id:'featured1_register', :class => 'button radius secondary small', :'data-reveal-id' => 'register' ) %></div>
+  </li>
+</ul>
+</div>
+</div>
 
 </div>
 </div>

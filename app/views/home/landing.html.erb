@@ -10,20 +10,82 @@
 <% content_for :body do %>
 <script type="text/javascript">
 	$.backstretch("assets/wizards_and_spaceships.jpg");
+	$("#featured1").on("orbit:after-slide-change", function(event, orbit) {
+		if (orbit.slide_number == 1)
+			{
+			var prev_slide = 5;
+			var next_slide = 2;
+			}
+		else if (orbit.slide_number == 2)
+			{
+			var prev_slide = 1;
+			var next_slide = 3;
+			}
+		else if (orbit.slide_number == 3)
+			{
+			var prev_slide = 2;
+			var next_slide = 4;
+			}
+		else if (orbit.slide_number == 4)
+                        {
+                        var prev_slide = 3;
+                        var next_slide = 5;
+                        }
+                else if (orbit.slide_number == 5)
+                        {
+                        var prev_slide = 4;
+                        var next_slide = 1;
+                        }
+		else
+			{
+			}
+
+		  $(".orbit-container").addClass("slide" + orbit.slide_number);
+		  $(".orbit-container").removeClass("slide" + prev_slide);
+		  $(".orbit-container").removeClass("slide" + next_slide);
+
+
+		  $("li.active").css({
+			    "position":"relative"
+			});
+
+		  $(".orbit-caption").css({
+			    "position":"absolute",
+			    top: 0,
+			    height: 50
+			});
+
+
+		  console.info("after slide change");
+		  console.info("slide " + orbit.slide_number + " of " + orbit.total_slides);
+
+	});
+	$("#featured1").on("orbit:ready", function(event) {
+		  $(".orbit-container").addClass("slide1");
+		  $("li.active").css({
+                            "position":"relative"
+                        });
+
+                  $(".orbit-caption").css({
+                            "position":"absolute",
+                            top: 0,
+			    height: 50
+                        });
+		  
+		  console.info("slide1");
+
+	});
+
 </script>
 <% end %>
 
 <script>
 	function set_page() {
-		if(!((window.location.href == 'http://localhost:3000/') || (window.location.href == 'http://localhost:3000/##'))
+		if (!((window.location.href == 'http://localhost:3000/') || (window.location.href == 'http://localhost:3000/##')))
 		{			
 			(window.location.href = '/');
-
 		}	
 	}
-
-
-	
 
 set_page();
 

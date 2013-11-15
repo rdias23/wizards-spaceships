@@ -2,22 +2,27 @@ class Wizard
   @document_ready: ->
     $('body').on('click', '#login-form-btn', Wizard.show_login_form)
     $('body').on('click', '#cancel_btn', Wizard.hide_login_form)
-    $('#simple-menu').sidr()
     $('body').on('mouseover', '.book_on_shelf', Wizard.book_shift)
     $('body').on('mouseout', '.book_on_shelf', Wizard.book_shift2) 
     $('body').chardinJs()
+
     $('body').on('click', 'a#learn-more', Wizard.show_onboard)
     $('body').on "chardinJs:stop", ->
-      $('#login_form2').addClass("hide")
+      $('#login_form2').addClass('hide')
+      $('#call_to_action').removeClass('hide')
       console.log('chardingJs:stop')
 
     $('body').on "chardinJs:start", ->
+      console.log('chardingJs:start')
+
+    $('#login_form2').on "chardinJs:start", ->
       console.log('chardingJs:start')
 
     $('a[data-toggle="chardinjs"]').on 'click', (e) ->
       e.preventDefault()
       unless(window.location.pathname == "/home/index")  
         $('#login_form2').removeClass("hide") if $(this).data('show-form')
+      $('#onboard').addClass('total_transparency')
       ($('body').data('chardinJs')).toggle()
 
 
