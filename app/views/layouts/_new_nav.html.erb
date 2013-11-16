@@ -23,7 +23,7 @@
     <ul class="left">
      <% if @auth.blank? %>
        <li class='name'><h1><%= link_to('Login', '##', :id => 'login-form-btn') %></h1></li>
-       <li class='name' data-position=right data-intro='Click here to Register'><h1><%=link_to('Register','#', :'data-reveal-id' => 'register' ) %></h1></li>
+       <li class='name' data-position=right data-intro='Click here to Register'><h1><%=link_to('Register','##', :'data-reveal-id' => 'register' ) %></h1></li>
      <% end %>
 
 
@@ -62,8 +62,8 @@
 <h3> Browse the <span class="red">NPR</span> top <span class="red"> 100</span></h3></br>
 <h3> Put the <span class="red">books </span> you have read onto your <span class="red">bookshelf</span></h3></br>
 <h3> Create <span class="red">Topics </span> and <span class="red">Discuss!</span></h3></br>
-<div class=learn_more_button"> 
-<%= link_to('LEARN MORE', '##', :id => 'learn-more', :class => 'button radius success small') %>
+<div class=learn_more_button">
+<%= link_to('LEARN MORE', '##', :id => 'learn-more', :class => 'button radius success small learn-more-class', data: { position: 'top', intro: 'Take a tour of the site!'}) %>
 </div>
 
 </div>
@@ -75,7 +75,7 @@
 <div class="slideshow-wrapper">
   <div class="preloader"></div>
 <div class="slideshow-wrapper-inner">
-<ul id="featured1" data-orbit data-options="slide_number_class: hide; bullets:false;">
+<ul id="featured1" data-orbit data-options="slide_number_class: hide; timer_speed:4000; bullets: false;">
   <li>
     <img src="/assets/slider1.png" />
     <div class="orbit-caption"><%=link_to('Sign Me Up!','#', id:'featured1_register', :class => 'button radius secondary small', :'data-reveal-id' => 'register' ) %></div>
@@ -123,7 +123,9 @@
   <div><%= f.submit "LOGIN", :class => "button small radius alert" %> <a href="#" class="button small radius alert" id="cancel_btn">CANCEL</a></div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%=link_to('Forgot your password?','##', :'data-reveal-id' => 'forgot_password' ) %>
+
+<%#= render "devise/shared/links" %>
 </div>
 
 <div id='modals'>
@@ -134,6 +136,14 @@
   <%= render :template => "devise/registrations/new", 
                     :locals => { 
                       :resource => User.new, 
+                      :resource_name => :user } %>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="forgot_password" class="reveal-modal [small]">
+  <%= render :template => "devise/passwords/new",
+                    :locals => {
+                      :resource => User.new,
                       :resource_name => :user } %>
   <a class="close-reveal-modal">&#215;</a>
 </div>

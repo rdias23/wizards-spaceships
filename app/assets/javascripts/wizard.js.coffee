@@ -9,10 +9,12 @@ class Wizard
     $('body').on('click', 'a#learn-more', Wizard.show_onboard)
     $('body').on "chardinJs:stop", ->
       $('#login_form2').addClass('hide')
-      $('#call_to_action').removeClass('hide')
+      $('#learn-more').removeClass('learn-more-class').addClass('learn-more-class2')
       console.log('chardingJs:stop')
 
     $('body').on "chardinJs:start", ->
+      $('#call_to_action').removeClass('hide')
+      $('#learn-more').removeClass('learn-more-class').addClass('learn-more-class2')
       console.log('chardingJs:start')
 
     $('#login_form2').on "chardinJs:start", ->
@@ -47,6 +49,7 @@ class Wizard
     $('#onboard').removeClass('total_transparency')
     $('#call_to_action').addClass('hide')
     $('#login_form2').addClass('hide')
+    $('body').chardinJs('stop')
 
 window.Wizard = Wizard
 

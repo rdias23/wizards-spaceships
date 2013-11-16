@@ -51,7 +51,7 @@
 
 		  $(".orbit-caption").css({
 			    "position":"absolute",
-			    top: 0,
+			    bottom: 0,
 			    height: 50
 			});
 
@@ -68,12 +68,26 @@
 
                   $(".orbit-caption").css({
                             "position":"absolute",
-                            top: 0,
+                            bottom: 0,
 			    height: 50
                         });
-		  
+
 		  console.info("slide1");
 
+		  $(".orbit-timer").click();
+	});
+
+
+	var timer_counter = 0;
+	$("#learn-more").click(function(){
+		  if (timer_counter == 0)
+			{
+		  	$(".orbit-timer").click();
+			timer_counter += 1;
+			}
+		  else
+			{
+			}
 	});
 
 </script>
