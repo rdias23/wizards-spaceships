@@ -9,7 +9,7 @@ class Wizard
     $('body').on('click', 'a#learn-more', Wizard.show_onboard)
     $('body').on "chardinJs:stop", ->
       $('#login_form2').addClass('hide')
-      $('#learn-more').removeClass('learn-more-class').addClass('learn-more-class2')
+      $('#learn-more').removeClass('learn-more-class2').addClass('learn-more-class')
       console.log('chardingJs:stop')
 
     $('body').on "chardinJs:start", ->
