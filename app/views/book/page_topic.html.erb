@@ -23,7 +23,7 @@ return false;
 
 <div id="topic_page_title_and_description_fieldsets"> <!-- start div 2 - id = "topic_page_title_and_description_fieldsets" ENDED -->
 <fieldset id="topic_page_title">
-<legend>Topic Question</legend>
+<legend>Topic Question for "<%= @topic.book.title %>" </legend>
 <span id="topic_question_title_span"><%= @topic.title %></span>
 <legend id="legend_user_and_created_at">by <%= @topic.user.email %> at <%= @topic.created_at.strftime("%B %e, %Y at %I:%M %p") %></legend>
 </fieldset>
